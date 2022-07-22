@@ -4,20 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:intro/intro.dart';
 
 class GeneralDemoPage extends StatelessWidget {
-
   const GeneralDemoPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Intro(
-      controller: IntroController(stepCount: 13),    // 13 means it has 13 steps.
+      controller: IntroController(stepCount: 13), // 13 means it has 13 steps.
       child: const _IntroDemo(),
     );
   }
 }
 
 class _IntroDemo extends StatefulWidget {
-
   const _IntroDemo({Key? key}) : super(key: key);
 
   @override
@@ -25,7 +23,6 @@ class _IntroDemo extends StatefulWidget {
 }
 
 class _IntroDemoState extends State<_IntroDemo> {
-
   Intro? _intro;
 
   @override
@@ -99,7 +96,8 @@ class _IntroDemoState extends State<_IntroDemo> {
                 step: 3,
                 controller: _intro!.controller,
                 cardContents: const TextSpan(
-                  text: "You can specify the behavior and style of the buttons of this \n"
+                  text:
+                      "You can specify the behavior and style of the buttons of this \n"
                       "presentation card, such as labels, fonts, colors, backgrounds,\n"
                       "borders, sizes, and visibility through the [cardDecoration] field.\n\n"
                       "The [cardDecoration] field in this [IntroStepTarget] widget only\n"
@@ -116,26 +114,29 @@ class _IntroDemoState extends State<_IntroDemo> {
                   nextButtonFinishLabel: "Complete",
                   closeButtonLabel: "Close",
                   nextButtonStyle: ButtonStyle(
-                    backgroundColor: MaterialStateColor.resolveWith((states) => Colors.green),
+                    backgroundColor: MaterialStateColor.resolveWith(
+                        (states) => Colors.green),
                   ),
                   previousButtonStyle: ButtonStyle(
-                    textStyle: MaterialStateTextStyle.resolveWith((states) => const TextStyle(
-                      inherit: false,
-                      fontSize: 10,
-                      fontStyle: FontStyle.italic,
-                    )),
-                    foregroundColor: MaterialStateColor.resolveWith((states) => Colors.black),
-                    backgroundColor: MaterialStateColor.resolveWith((states) => Colors.grey),
+                    textStyle: MaterialStateTextStyle.resolveWith(
+                        (states) => const TextStyle(
+                              inherit: false,
+                              fontSize: 10,
+                              fontStyle: FontStyle.italic,
+                            )),
+                    foregroundColor: MaterialStateColor.resolveWith(
+                        (states) => Colors.black),
+                    backgroundColor:
+                        MaterialStateColor.resolveWith((states) => Colors.grey),
                   ),
                   closeButtonStyle: ButtonStyle(
                       backgroundColor: MaterialStateColor.resolveWith((states) {
-                        if (states.contains(MaterialState.hovered)) {
-                          return Colors.blueAccent;
-                        } else {
-                          return Colors.pinkAccent;
-                        }
-                      })
-                  ),
+                    if (states.contains(MaterialState.hovered)) {
+                      return Colors.blueAccent;
+                    } else {
+                      return Colors.pinkAccent;
+                    }
+                  })),
                 ),
                 child: Container(
                   width: 120,
@@ -150,7 +151,8 @@ class _IntroDemoState extends State<_IntroDemo> {
                 step: 4,
                 controller: _intro!.controller,
                 cardContents: const TextSpan(
-                  text: "You can change the decoration for highlight area and this introduction card.\n\n"
+                  text:
+                      "You can change the decoration for highlight area and this introduction card.\n\n"
                       "The effect is as you can see now.",
                 ),
                 cardDecoration: IntroCardDecoration(
@@ -166,18 +168,28 @@ class _IntroDemoState extends State<_IntroDemo> {
                   ),
                   showPreviousButton: true,
                   previousButtonStyle: ButtonStyle(
-                    shape: MaterialStateProperty.resolveWith((states) => const RoundedRectangleBorder()),
-                    elevation: MaterialStateProperty.resolveWith((states) => 0.0),
-                    backgroundColor: MaterialStateProperty.resolveWith((states) => Colors.grey),
-                    foregroundColor: MaterialStateProperty.resolveWith((states) => Colors.white),
-                    fixedSize: MaterialStateProperty.resolveWith((states) => const Size(120, 35)),
+                    shape: MaterialStateProperty.resolveWith(
+                        (states) => const RoundedRectangleBorder()),
+                    elevation:
+                        MaterialStateProperty.resolveWith((states) => 0.0),
+                    backgroundColor: MaterialStateProperty.resolveWith(
+                        (states) => Colors.grey),
+                    foregroundColor: MaterialStateProperty.resolveWith(
+                        (states) => Colors.white),
+                    fixedSize: MaterialStateProperty.resolveWith(
+                        (states) => const Size(120, 35)),
                   ),
                   nextButtonStyle: ButtonStyle(
-                    shape: MaterialStateProperty.resolveWith((states) => const RoundedRectangleBorder()),
-                    elevation: MaterialStateProperty.resolveWith((states) => 0.0),
-                    backgroundColor: MaterialStateProperty.resolveWith((states) => Colors.cyan),
-                    foregroundColor: MaterialStateProperty.resolveWith((states) => Colors.black),
-                    fixedSize: MaterialStateProperty.resolveWith((states) => const Size(120, 35)),
+                    shape: MaterialStateProperty.resolveWith(
+                        (states) => const RoundedRectangleBorder()),
+                    elevation:
+                        MaterialStateProperty.resolveWith((states) => 0.0),
+                    backgroundColor: MaterialStateProperty.resolveWith(
+                        (states) => Colors.cyan),
+                    foregroundColor: MaterialStateProperty.resolveWith(
+                        (states) => Colors.black),
+                    fixedSize: MaterialStateProperty.resolveWith(
+                        (states) => const Size(120, 35)),
                   ),
                 ),
                 highlightDecoration: IntroHighlightDecoration(
@@ -209,34 +221,46 @@ class _IntroDemoState extends State<_IntroDemo> {
                       children: [
                         const TextSpan(text: "You can use rich text here.\n\n"),
                         const TextSpan(text: "Such as "),
-                        const TextSpan(text: "bold", style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        )),
+                        const TextSpan(
+                            text: "bold",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            )),
                         const TextSpan(text: ", "),
-                        const TextSpan(text: "italic", style: TextStyle(
-                          fontStyle: FontStyle.italic,
-                        )),
+                        const TextSpan(
+                            text: "italic",
+                            style: TextStyle(
+                              fontStyle: FontStyle.italic,
+                            )),
                         const TextSpan(text: ", "),
-                        const TextSpan(text: "underline", style: TextStyle(
-                          decoration: TextDecoration.underline,
-                          decorationStyle: TextDecorationStyle.dashed,
-                        )),
+                        const TextSpan(
+                            text: "underline",
+                            style: TextStyle(
+                              decoration: TextDecoration.underline,
+                              decorationStyle: TextDecorationStyle.dashed,
+                            )),
                         const TextSpan(text: ", "),
-                        const TextSpan(text: "font size", style: TextStyle(fontSize: 40.0)),
+                        const TextSpan(
+                            text: "font size",
+                            style: TextStyle(fontSize: 40.0)),
                         const TextSpan(text: ", "),
-                        const TextSpan(text: "color", style: TextStyle(
-                          color: Colors.pink,
-                          backgroundColor: Colors.yellow,
-                        )),
+                        const TextSpan(
+                            text: "color",
+                            style: TextStyle(
+                              color: Colors.pink,
+                              backgroundColor: Colors.yellow,
+                            )),
                         const TextSpan(text: ", emoji(😂👀🐶💖)"),
                         const TextSpan(text: ",\n"),
-                        TextSpan(text: "link (click to go to the next step)",
+                        TextSpan(
+                          text: "link (click to go to the next step)",
                           style: const TextStyle(
                             decoration: TextDecoration.underline,
                           ),
-                          recognizer: TapGestureRecognizer()..onTap = () {
-                            _intro!.controller.next();
-                          },
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              _intro!.controller.next();
+                            },
                           mouseCursor: SystemMouseCursors.click,
                         ),
                         const TextSpan(text: " and so on."),
@@ -255,7 +279,8 @@ class _IntroDemoState extends State<_IntroDemo> {
                     step: 6,
                     controller: _intro!.controller,
                     cardContents: const TextSpan(
-                      text: "Notice the alignment of the introduction card with respect to\n"
+                      text:
+                          "Notice the alignment of the introduction card with respect to\n"
                           "the highlighted area. By default it automatically calculates where\n"
                           "it should be displayed. But you can specify it manually. For example,\n"
                           "in the next step, I'll show it inside the highlighted area.",
@@ -306,7 +331,8 @@ class _IntroDemoState extends State<_IntroDemo> {
                     step: 8,
                     controller: _intro!.controller,
                     cardContents: const TextSpan(
-                      text: "You can handle tap event in the highlight area.\n\n"
+                      text:
+                          "You can handle tap event in the highlight area.\n\n"
                           "Specify [onTargetTap] callback in [IntroStepTarget] widget. And then try to\n"
                           "tap the highlight area to go back previous step.\n\n"
                           "Additional, you can also set the mouse cursor through [highlightDecoration].",
@@ -330,9 +356,9 @@ class _IntroDemoState extends State<_IntroDemo> {
                     step: 9,
                     controller: _intro!.controller,
                     cardContents: const TextSpan(
-                        text: "Try to change the window size (if running on desktop platform) or rotate\n"
-                            "the screen (if running on mobile platform), it will adjust automatically."
-                    ),
+                        text:
+                            "Try to change the window size (if running on desktop platform) or rotate\n"
+                            "the screen (if running on mobile platform), it will adjust automatically."),
                     child: Container(
                       width: 190,
                       height: 30,
@@ -353,7 +379,8 @@ class _IntroDemoState extends State<_IntroDemo> {
                 step: 10,
                 controller: _intro!.controller,
                 cardContents: const TextSpan(
-                  text: "You can do something through the [onStepWillActivate] or\n"
+                  text:
+                      "You can do something through the [onStepWillActivate] or\n"
                       "[onStepWillDeactivate] callback when this step is activating or\n"
                       "deactivating. By the way, these two callbacks support providing a\n"
                       "[Future].\n\n"
@@ -426,9 +453,7 @@ class _IntroDemoState extends State<_IntroDemo> {
                             color: Colors.black87,
                             blurRadius: 3.0,
                           ),
-                        ]
-                    )
-                ),
+                        ])),
                 cardBuilder: (context, param, decoration) {
                   return Container(
                     width: 500,
@@ -451,14 +476,17 @@ class _IntroDemoState extends State<_IntroDemo> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Row(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
-                                      const Icon(Icons.heart_broken, size: 40, color: Colors.redAccent),
+                                      const Icon(Icons.heart_broken,
+                                          size: 40, color: Colors.redAccent),
                                       const SizedBox(width: 20),
                                       Expanded(
-                                        child: Text("If you don't like the default style of introduction card. "
-                                            "You can customize it using [IntroStepTarget.custom] constructor "
-                                            "and specify the [cardBuilder] field.",
+                                        child: Text(
+                                          "If you don't like the default style of introduction card. "
+                                          "You can customize it using [IntroStepTarget.custom] constructor "
+                                          "and specify the [cardBuilder] field.",
                                           style: decoration.textStyle,
                                         ),
                                       ),
@@ -466,13 +494,16 @@ class _IntroDemoState extends State<_IntroDemo> {
                                   ),
                                   const SizedBox(height: 20),
                                   Row(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
-                                      const Icon(Icons.sports_handball, size: 40, color: Colors.orangeAccent),
+                                      const Icon(Icons.sports_handball,
+                                          size: 40, color: Colors.orangeAccent),
                                       const SizedBox(width: 20),
                                       Expanded(
-                                        child: Text("You can using the [IntroParams] argument to get the step status "
-                                            "or to control the presentation flow.",
+                                        child: Text(
+                                          "You can using the [IntroParams] argument to get the step status "
+                                          "or to control the presentation flow.",
                                           style: decoration.textStyle,
                                         ),
                                       )
@@ -480,13 +511,16 @@ class _IntroDemoState extends State<_IntroDemo> {
                                   ),
                                   const SizedBox(height: 20),
                                   Row(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
-                                      const Icon(Icons.draw, size: 40, color: Colors.greenAccent),
+                                      const Icon(Icons.draw,
+                                          size: 40, color: Colors.greenAccent),
                                       const SizedBox(width: 20),
                                       Expanded(
-                                        child: Text("The [IntroCardDecoration] argument comes from the context, "
-                                            "and you can use some of its properties.",
+                                        child: Text(
+                                          "The [IntroCardDecoration] argument comes from the context, "
+                                          "and you can use some of its properties.",
                                           style: decoration.textStyle,
                                         ),
                                       ),
@@ -498,8 +532,9 @@ class _IntroDemoState extends State<_IntroDemo> {
                                 constraints: const BoxConstraints.expand(),
                                 alignment: Alignment.center,
                                 child: Transform.rotate(
-                                  angle: -pi/8,
-                                  child: const Text("   CUSTOMIZATION",
+                                  angle: -pi / 8,
+                                  child: const Text(
+                                    "   CUSTOMIZATION",
                                     style: TextStyle(
                                       fontSize: 40.0,
                                       color: Colors.white24,
@@ -525,7 +560,8 @@ class _IntroDemoState extends State<_IntroDemo> {
                               elevation: 0,
                               hoverElevation: 0,
                               highlightElevation: 0,
-                              child: const Icon(Icons.arrow_upward, color: Colors.white, size: 25),
+                              child: const Icon(Icons.arrow_upward,
+                                  color: Colors.white, size: 25),
                             ),
                             const SizedBox(height: 20),
                             MaterialButton(
@@ -538,17 +574,19 @@ class _IntroDemoState extends State<_IntroDemo> {
                               elevation: 0,
                               hoverElevation: 0,
                               highlightElevation: 0,
-                              child: const Icon(Icons.arrow_downward, color: Colors.white, size: 25),
+                              child: const Icon(Icons.arrow_downward,
+                                  color: Colors.white, size: 25),
                             ),
                             Expanded(child: Container()),
                             Container(
                               decoration: BoxDecoration(
                                   border: Border.all(
-                                    color: Colors.white38,
-                                  )
-                              ),
-                              padding: const EdgeInsets.symmetric(horizontal: 3, vertical: 2),
-                              child: Text("${param.step}/${param.controller.stepCount}",
+                                color: Colors.white38,
+                              )),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 3, vertical: 2),
+                              child: Text(
+                                "${param.step}/${param.controller.stepCount}",
                                 style: const TextStyle(color: Colors.white38),
                               ),
                             ),
@@ -570,37 +608,38 @@ class _IntroDemoState extends State<_IntroDemo> {
               IntroStepTarget(
                 step: 13,
                 controller: _intro!.controller,
-                cardContents: TextSpan(
-                    children: [
-                      const TextSpan(text: "Congratulations on coming the last step.\n\n"
+                cardContents: TextSpan(children: [
+                  const TextSpan(
+                      text: "Congratulations on coming the last step.\n\n"
                           "You can find that the label of <Next> button has been became\n"
                           "to  <Finish> automatically. Click it to close this presentation flow.\n\n"
                           "By the way, you can jump to any step via the [IntroController]. Try\n"
                           "to tap the following links back to a former step.\n\n"),
-                      TextSpan(
-                        text: "Jump to the first step",
-                        recognizer: TapGestureRecognizer()..onTap = () {
-                          _intro!.controller.jumpTo(1);
-                        },
-                        style: const TextStyle(
-                          decoration: TextDecoration.underline,
-                          color: Colors.blue,
-                        ),
-                      ),
-                      const TextSpan(text: " 👈\n"),
-                      TextSpan(
-                        text: "Jump to step eleven",
-                        recognizer: TapGestureRecognizer()..onTap = () {
-                          _intro!.controller.jumpTo(11);
-                        },
-                        style: const TextStyle(
-                          decoration: TextDecoration.underline,
-                          color: Colors.blue,
-                        ),
-                      ),
-                      const TextSpan(text: " 👈\n"),
-                    ]
-                ),
+                  TextSpan(
+                    text: "Jump to the first step",
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () {
+                        _intro!.controller.jumpTo(1);
+                      },
+                    style: const TextStyle(
+                      decoration: TextDecoration.underline,
+                      color: Colors.blue,
+                    ),
+                  ),
+                  const TextSpan(text: " 👈\n"),
+                  TextSpan(
+                    text: "Jump to step eleven",
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () {
+                        _intro!.controller.jumpTo(11);
+                      },
+                    style: const TextStyle(
+                      decoration: TextDecoration.underline,
+                      color: Colors.blue,
+                    ),
+                  ),
+                  const TextSpan(text: " 👈\n"),
+                ]),
                 child: Container(
                   width: 120,
                   height: 80,

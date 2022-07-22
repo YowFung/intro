@@ -1,7 +1,6 @@
 part of intro;
 
 class _GradualOpacity extends StatefulWidget {
-
   final Duration duration;
   final double startOpacity;
   final double endOpacity;
@@ -15,8 +14,7 @@ class _GradualOpacity extends StatefulWidget {
     this.endOpacity = 1.0,
     required this.child,
     this.onAnimationFinished,
-  })
-      : assert(startOpacity >= 0.0 && startOpacity <= 1.0),
+  })  : assert(startOpacity >= 0.0 && startOpacity <= 1.0),
         assert(endOpacity >= 0.0 && endOpacity <= 1.0),
         assert(!duration.isNegative),
         super(key: key);
@@ -26,7 +24,6 @@ class _GradualOpacity extends StatefulWidget {
 }
 
 class _GradualOpacityState extends State<_GradualOpacity> {
-
   late double opacity;
   late Duration duration;
 
@@ -72,7 +69,6 @@ class _GradualOpacityState extends State<_GradualOpacity> {
 
 /// 控制显示步骤的控制器。
 class IntroController {
-
   final int stepCount;
 
   Intro? _intro;
@@ -89,7 +85,8 @@ class IntroController {
     required this.stepCount,
   }) {
     assert(stepCount > 0, "The [stepCount] argument must be greater than 0.");
-    _keys = Map.fromEntries(List.generate(stepCount, (i) => MapEntry(i+1, GlobalObjectKey("$hashCode-${i+1}"))));
+    _keys = Map.fromEntries(List.generate(stepCount,
+        (i) => MapEntry(i + 1, GlobalObjectKey("$hashCode-${i + 1}"))));
   }
 
   bool get mounted => stepCount > 0 && _keys.length == stepCount;
@@ -131,13 +128,14 @@ class IntroController {
 
   GlobalKey? get currentStepKey {
     assert(_debugAssertNotDisposed());
-    return currentStep == 0 ? null : _keys[currentStep-1];
+    return currentStep == 0 ? null : _keys[currentStep - 1];
   }
 
   bool _debugAssertNotDisposed() {
     assert(() {
       if (!mounted) {
-        throw IntroException("The instance of IntroController has been destroyed, "
+        throw IntroException(
+            "The instance of IntroController has been destroyed, "
             "you shouldn't call any method of it.");
       }
       return true;
@@ -148,7 +146,8 @@ class IntroController {
   bool _debugAssertOpened() {
     assert(() {
       if (!_isOpened) {
-        throw IntroException("Please call [start] method to launch the introduction process first.");
+        throw IntroException(
+            "Please call [start] method to launch the introduction process first.");
       }
       return true;
     }());
@@ -158,7 +157,8 @@ class IntroController {
   bool _debugAssertStepRange(int step) {
     assert(() {
       if (step <= 0 || step > stepCount) {
-        throw IntroException("The [step] value `$step` out of range [1..$stepCount].");
+        throw IntroException(
+            "The [step] value `$step` out of range [1..$stepCount].");
       }
       return true;
     }());
@@ -183,7 +183,7 @@ class IntroController {
     if (context == null) {
       throw IntroException(
         'The current context is null, because there is no widget in the tree that matches this step.'
-            ' Please check your code. If you think you have encountered a bug, please let me know.',
+        ' Please check your code. If you think you have encountered a bug, please let me know.',
       );
     }
 
@@ -218,7 +218,8 @@ class IntroController {
 
     final params = _targets[_currentStep];
     if (params == null) {
-      throw IntroException("Can not build introduction overlay for step `$_currentStep`. "
+      throw IntroException(
+          "Can not build introduction overlay for step `$_currentStep`. "
           "It means a [IntroStepTarget] widget using this step has not been rendered. "
           "Please check whether the `IntroStepTarget(step: $_currentStep)` widget has been created "
           "and make sure it has in the widget tree.");
@@ -263,10 +264,13 @@ class IntroController {
         duration: intro._animationDuration,
         width: rect.width,
         height: rect.height,
-        padding: widget.highlightDecoration?.padding ?? intro._highlightDecoration.padding,
+        padding: widget.highlightDecoration?.padding ??
+            intro._highlightDecoration.padding,
         decoration: BoxDecoration(
-          border: widget.highlightDecoration?.border ?? intro._highlightDecoration.border,
-          borderRadius: widget.highlightDecoration?.radius ?? intro._highlightDecoration.radius,
+          border: widget.highlightDecoration?.border ??
+              intro._highlightDecoration.border,
+          borderRadius: widget.highlightDecoration?.radius ??
+              intro._highlightDecoration.radius,
         ),
       ),
     );
@@ -310,7 +314,9 @@ class IntroController {
                 width: rect.width,
                 height: rect.height,
                 child: MouseRegion(
-                  cursor: widget.highlightDecoration?.cursor ?? intro._highlightDecoration.cursor ?? MouseCursor.defer,
+                  cursor: widget.highlightDecoration?.cursor ??
+                      intro._highlightDecoration.cursor ??
+                      MouseCursor.defer,
                   child: GestureDetector(
                     onTap: widget.onTargetTap,
                     child: AnimatedContainer(
@@ -318,8 +324,10 @@ class IntroController {
                       width: rect.width,
                       height: rect.height,
                       decoration: BoxDecoration(
-                        border: widget.highlightDecoration?.border ?? intro._highlightDecoration.border,
-                        borderRadius: widget.highlightDecoration?.radius ?? intro._highlightDecoration.radius,
+                        border: widget.highlightDecoration?.border ??
+                            intro._highlightDecoration.border,
+                        borderRadius: widget.highlightDecoration?.radius ??
+                            intro._highlightDecoration.radius,
                         color: Colors.white,
                       ),
                     ),
@@ -346,8 +354,9 @@ class IntroController {
     final screen = params._state._physicalSize;
     final left = rect.left.isInfinite ? null : rect.left;
     final right = rect.right.isInfinite ? null : (screen.width - rect.right);
-    final top = rect.top.isInfinite ? null: rect.top;
-    final bottom = rect.bottom.isInfinite ? null : (screen.height - rect.bottom);
+    final top = rect.top.isInfinite ? null : rect.top;
+    final bottom =
+        rect.bottom.isInfinite ? null : (screen.height - rect.bottom);
 
     return Positioned(
       left: left,
@@ -374,10 +383,15 @@ class IntroController {
     });
   }
 
-  Future<void> _switchStep(int fromStep, int toStep, [bool needRefresh = true]) async {
+  Future<void> _switchStep(int fromStep, int toStep,
+      [bool needRefresh = true]) async {
     _switching = true;
     if (fromStep != 0) {
-      await _targets[fromStep]?._state.widget.onStepWillDeactivate?.call(toStep);
+      await _targets[fromStep]
+          ?._state
+          .widget
+          .onStepWillDeactivate
+          ?.call(toStep);
     }
     if (toStep != 0) {
       await _targets[toStep]?._state.widget.onStepWillActivate?.call(fromStep);
@@ -385,12 +399,13 @@ class IntroController {
     _switching = false;
 
     if (needRefresh && _isOpened && _currentStep == fromStep) {
-      _currentStep  = toStep;
+      _currentStep = toStep;
       refresh();
     }
   }
 
-  Future<void> start(BuildContext context, {
+  Future<void> start(
+    BuildContext context, {
     int initStep = 1,
   }) async {
     assert(_debugAssertNotDisposed());

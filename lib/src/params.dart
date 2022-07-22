@@ -2,7 +2,6 @@ part of intro;
 
 /// Describes the alignment of introduction card widget relative to highlighted widget.
 enum IntroCardAlign {
-
   /// The card widget is aligned to the top left corner inside the target widget.
   insideTopLeft,
 
@@ -42,7 +41,6 @@ enum IntroCardAlign {
 
 /// Parameters about a step.
 class IntroParams {
-
   final _IntroStepTargetState _state;
   IntroCardAlign? _cardAlign;
 
@@ -68,9 +66,9 @@ class IntroParams {
   /// Geometry of highlighted area (the hole above the target widget) for this step.
   Rect get highlightRect {
     final rect = targetRect;
-    final padding = _state.widget.highlightDecoration?.padding
-        ?? controller.intro._highlightDecoration.padding
-        ?? EdgeInsets.zero;
+    final padding = _state.widget.highlightDecoration?.padding ??
+        controller.intro._highlightDecoration.padding ??
+        EdgeInsets.zero;
     final startPoint = rect.topLeft - Offset(padding.left, padding.top);
     final endPoint = rect.bottomRight + Offset(padding.right, padding.bottom);
     return Rect.fromPoints(startPoint, endPoint);
@@ -80,11 +78,11 @@ class IntroParams {
   Rect get cardRect {
     final highlight = highlightRect;
     final screen = _state._physicalSize;
-    final margin = _state.widget.cardDecoration?.margin
-        ?? controller.intro._cardDecoration.margin
-        ?? const EdgeInsets.all(10);
-    var align = _state.widget.cardDecoration?.align
-        ?? controller.intro._cardDecoration.align;
+    final margin = _state.widget.cardDecoration?.margin ??
+        controller.intro._cardDecoration.margin ??
+        const EdgeInsets.all(10);
+    var align = _state.widget.cardDecoration?.align ??
+        controller.intro._cardDecoration.align;
 
     final mLeft = margin.left;
     final mRight = margin.right;
@@ -102,7 +100,10 @@ class IntroParams {
       final rightBlank = screen.width - hRight;
       final bottomBlank = screen.height - hBottom;
       const minimum = 120.0;
-      if (leftBlank < minimum && topBlank < minimum && rightBlank < minimum && bottomBlank < minimum) {
+      if (leftBlank < minimum &&
+          topBlank < minimum &&
+          rightBlank < minimum &&
+          bottomBlank < minimum) {
         align = IntroCardAlign.insideTopLeft;
       } else {
         final hWidth = highlight.width;
@@ -117,7 +118,8 @@ class IntroParams {
           IntroCardAlign.outsideRightTop: rightBlank * (hHeight + bottomBlank),
           IntroCardAlign.outsideRightBottom: rightBlank * (topBlank + hHeight),
         };
-        final sortedKey = areaMap.keys.toList()..sort((k1, k2) => areaMap[k1]!.compareTo(areaMap[k2]!));
+        final sortedKey = areaMap.keys.toList()
+          ..sort((k1, k2) => areaMap[k1]!.compareTo(areaMap[k2]!));
         align = sortedKey.last;
         _cardAlign = align;
       }
@@ -126,23 +128,38 @@ class IntroParams {
     buildRect({double? left, double? right, double? top, double? bottom}) {
       assert(left != null || right != null);
       assert(top != null || bottom != null);
-      return Rect.fromLTRB(left ?? double.negativeInfinity, top ?? double.negativeInfinity,
-          right ?? double.infinity, bottom ?? double.infinity);
+      return Rect.fromLTRB(
+          left ?? double.negativeInfinity,
+          top ?? double.negativeInfinity,
+          right ?? double.infinity,
+          bottom ?? double.infinity);
     }
 
     switch (align) {
-      case IntroCardAlign.insideTopLeft: return buildRect(top: hTop + mTop, left: hLeft + mLeft);
-      case IntroCardAlign.insideTopRight: return buildRect(top: hTop + mTop, right: hRight - mRight);
-      case IntroCardAlign.insideBottomLeft: return buildRect(bottom: hBottom - mBottom, left: hLeft + mLeft);
-      case IntroCardAlign.insideBottomRight: return buildRect(bottom: hBottom - mBottom, right: hRight - mRight);
-      case IntroCardAlign.outsideTopLeft: return buildRect(bottom: hTop - mBottom, left: hLeft);
-      case IntroCardAlign.outsideTopRight: return buildRect(bottom: hTop - mBottom, right: hRight);
-      case IntroCardAlign.outsideBottomLeft: return buildRect(top: hBottom + mTop, left: hLeft);
-      case IntroCardAlign.outsideBottomRight: return buildRect(top: hBottom + mTop, right: hRight);
-      case IntroCardAlign.outsideLeftTop: return buildRect(right: hLeft - mRight, top: hTop);
-      case IntroCardAlign.outsideLeftBottom: return buildRect(right: hLeft - mRight, bottom: hBottom);
-      case IntroCardAlign.outsideRightTop: return buildRect(left: hRight + mLeft, top: hTop);
-      case IntroCardAlign.outsideRightBottom: return buildRect(left: hRight + mLeft, bottom: hBottom);
+      case IntroCardAlign.insideTopLeft:
+        return buildRect(top: hTop + mTop, left: hLeft + mLeft);
+      case IntroCardAlign.insideTopRight:
+        return buildRect(top: hTop + mTop, right: hRight - mRight);
+      case IntroCardAlign.insideBottomLeft:
+        return buildRect(bottom: hBottom - mBottom, left: hLeft + mLeft);
+      case IntroCardAlign.insideBottomRight:
+        return buildRect(bottom: hBottom - mBottom, right: hRight - mRight);
+      case IntroCardAlign.outsideTopLeft:
+        return buildRect(bottom: hTop - mBottom, left: hLeft);
+      case IntroCardAlign.outsideTopRight:
+        return buildRect(bottom: hTop - mBottom, right: hRight);
+      case IntroCardAlign.outsideBottomLeft:
+        return buildRect(top: hBottom + mTop, left: hLeft);
+      case IntroCardAlign.outsideBottomRight:
+        return buildRect(top: hBottom + mTop, right: hRight);
+      case IntroCardAlign.outsideLeftTop:
+        return buildRect(right: hLeft - mRight, top: hTop);
+      case IntroCardAlign.outsideLeftBottom:
+        return buildRect(right: hLeft - mRight, bottom: hBottom);
+      case IntroCardAlign.outsideRightTop:
+        return buildRect(left: hRight + mLeft, top: hTop);
+      case IntroCardAlign.outsideRightBottom:
+        return buildRect(left: hRight + mLeft, bottom: hBottom);
     }
   }
 
@@ -150,13 +167,13 @@ class IntroParams {
   ///
   /// If you don't give it when you build the [IntroStepTarget] or [IntroApp],
   /// it will be computed automatically after you access the [cardRect] attribute.
-  IntroCardAlign? get actualCardAlign => _state.widget.cardDecoration?.align
-      ?? controller.intro._cardDecoration.align
-      ?? _cardAlign;
+  IntroCardAlign? get actualCardAlign =>
+      _state.widget.cardDecoration?.align ??
+      controller.intro._cardDecoration.align ??
+      _cardAlign;
 
   @override
   String toString() {
-
     rect2Str(Rect rect) {
       final left = rect.left.toStringAsFixed(1);
       final top = rect.top.toStringAsFixed(1);

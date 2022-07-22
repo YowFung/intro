@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:intro/intro.dart';
 
 class AdvancedDemoPage extends StatefulWidget {
-
   const AdvancedDemoPage({Key? key}) : super(key: key);
 
   @override
@@ -10,7 +9,6 @@ class AdvancedDemoPage extends StatefulWidget {
 }
 
 class _AdvancedDemoPageState extends State<AdvancedDemoPage> {
-
   final introCtrl = IntroController(stepCount: 6);
 
   @override
@@ -45,7 +43,8 @@ class _AdvancedDemoPageState extends State<AdvancedDemoPage> {
               child: ElevatedButton(
                 onPressed: () async {
                   Navigator.pop(context);
-                  await Future.delayed(const Duration(milliseconds: 300), () async {
+                  await Future.delayed(const Duration(milliseconds: 300),
+                      () async {
                     await introCtrl.start(context, initStep: 3);
                   });
                 },
@@ -92,7 +91,8 @@ class _AdvancedDemoPageState extends State<AdvancedDemoPage> {
               children: [
                 const Expanded(
                   child: Center(
-                    child: Text("Do you need to continue?",
+                    child: Text(
+                      "Do you need to continue?",
                       style: TextStyle(
                         color: Colors.pink,
                         fontSize: 16.0,
@@ -173,12 +173,16 @@ class _AdvancedDemoPageState extends State<AdvancedDemoPage> {
         showPreviousButton: false,
         showCloseButton: true,
         nextButtonStyle: ButtonStyle(
-          shape: MaterialStateProperty.resolveWith((states) => const RoundedRectangleBorder()),
-          backgroundColor: MaterialStateColor.resolveWith((states) => Colors.cyan),
+          shape: MaterialStateProperty.resolveWith(
+              (states) => const RoundedRectangleBorder()),
+          backgroundColor:
+              MaterialStateColor.resolveWith((states) => Colors.cyan),
         ),
         closeButtonStyle: ButtonStyle(
-          shape: MaterialStateProperty.resolveWith((states) => const RoundedRectangleBorder()),
-          backgroundColor: MaterialStateColor.resolveWith((states) => Colors.pink),
+          shape: MaterialStateProperty.resolveWith(
+              (states) => const RoundedRectangleBorder()),
+          backgroundColor:
+              MaterialStateColor.resolveWith((states) => Colors.pink),
         ),
         textStyle: const TextStyle(
           color: Colors.white,
@@ -211,7 +215,8 @@ class _AdvancedDemoPageState extends State<AdvancedDemoPage> {
                 onTargetTap: introCtrl.next,
                 onStepWillDeactivate: (willToStep) async {
                   if (willToStep == 2) {
-                    Navigator.push(context, MaterialPageRoute(builder: _newPageBuilder));
+                    Navigator.push(
+                        context, MaterialPageRoute(builder: _newPageBuilder));
                     await Future.delayed(const Duration(milliseconds: 50));
                   }
                 },
@@ -265,7 +270,8 @@ class _AdvancedDemoPageState extends State<AdvancedDemoPage> {
                 highlightDecoration: const IntroHighlightDecoration(
                   cursor: MouseCursor.defer,
                 ),
-                child: const Icon(Icons.check_circle, size: 30, color: Colors.green),
+                child: const Icon(Icons.check_circle,
+                    size: 30, color: Colors.green),
               ),
             ],
           ),

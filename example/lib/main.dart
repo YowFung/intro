@@ -17,7 +17,6 @@ void main() {
 }
 
 class MyHomePage extends StatelessWidget {
-
   const MyHomePage({Key? key}) : super(key: key);
 
   @override

@@ -1,7 +1,6 @@
 part of intro;
 
 class IntroStepTarget extends StatefulWidget {
-
   final int step;
   final IntroStepWillActivateCallback? onStepWillActivate;
   final IntroStepWillDeactivateCallback? onStepWillDeactivate;
@@ -27,9 +26,8 @@ class IntroStepTarget extends StatefulWidget {
     this.onTargetDispose,
     this.onTargetTap,
     required this.child,
-  })
-      : assert(step > 0 && step <= controller.stepCount,
-          "The [step: $step] out of range 1..${controller.stepCount}"),
+  })  : assert(step > 0 && step <= controller.stepCount,
+            "The [step: $step] out of range 1..${controller.stepCount}"),
         cardBuilder = IntroStepCard._buildDefaultCard(cardContents),
         super(key: key);
 
@@ -46,17 +44,16 @@ class IntroStepTarget extends StatefulWidget {
     this.onTargetDispose,
     this.onTargetTap,
     required this.child,
-  })
-      : assert(step > 0 && step <= controller.stepCount,
-          "The [step: $step] out of range 1..${controller.stepCount}"),
+  })  : assert(step > 0 && step <= controller.stepCount,
+            "The [step: $step] out of range 1..${controller.stepCount}"),
         super(key: key);
 
   @override
   State<IntroStepTarget> createState() => _IntroStepTargetState();
 }
 
-class _IntroStepTargetState extends State<IntroStepTarget> with WidgetsBindingObserver {
-
+class _IntroStepTargetState extends State<IntroStepTarget>
+    with WidgetsBindingObserver {
   late Size _physicalSize;
 
   @override
@@ -95,7 +92,8 @@ class _IntroStepTargetState extends State<IntroStepTarget> with WidgetsBindingOb
 
   void _updateTarget() {
     widget.controller._setTarget(this);
-    if (widget.controller._isOpened && widget.controller.currentStep == widget.step) {
+    if (widget.controller._isOpened &&
+        widget.controller.currentStep == widget.step) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         widget.controller.refresh();
       });

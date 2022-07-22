@@ -1,7 +1,6 @@
 part of intro;
 
 class IntroHighlightDecoration {
-
   final Border? border;
 
   final BorderRadiusGeometry? radius;
@@ -19,7 +18,6 @@ class IntroHighlightDecoration {
 }
 
 class IntroCardDecoration {
-
   final IntroCardAlign? align;
 
   final Size? size;

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:intro/intro.dart';
 
 class NestedDemoPage extends StatefulWidget {
-
   const NestedDemoPage({Key? key}) : super(key: key);
 
   @override
@@ -11,7 +10,6 @@ class NestedDemoPage extends StatefulWidget {
 }
 
 class _NestedDemoPageState extends State<NestedDemoPage> {
-
   final introCtrl1 = IntroController(stepCount: 5);
   final introCtrl2 = IntroController(stepCount: 3);
 
@@ -37,9 +35,12 @@ class _NestedDemoPageState extends State<NestedDemoPage> {
           ),
           align: IntroCardAlign.outsideTopLeft,
           nextButtonStyle: ButtonStyle(
-            shape: MaterialStateProperty.resolveWith((states) => const RoundedRectangleBorder()),
-            backgroundColor: MaterialStateProperty.resolveWith((states) => Colors.lime),
-            foregroundColor: MaterialStateProperty.resolveWith((states) => Colors.black),
+            shape: MaterialStateProperty.resolveWith(
+                (states) => const RoundedRectangleBorder()),
+            backgroundColor:
+                MaterialStateProperty.resolveWith((states) => Colors.lime),
+            foregroundColor:
+                MaterialStateProperty.resolveWith((states) => Colors.black),
           ),
         ),
         highlightDecoration: IntroHighlightDecoration(
@@ -56,9 +57,12 @@ class _NestedDemoPageState extends State<NestedDemoPage> {
             ),
             align: IntroCardAlign.outsideTopRight,
             nextButtonStyle: ButtonStyle(
-              shape: MaterialStateProperty.resolveWith((states) => const RoundedRectangleBorder()),
-              backgroundColor: MaterialStateProperty.resolveWith((states) => Colors.lightBlueAccent),
-              foregroundColor: MaterialStateProperty.resolveWith((states) => Colors.black),
+              shape: MaterialStateProperty.resolveWith(
+                  (states) => const RoundedRectangleBorder()),
+              backgroundColor: MaterialStateProperty.resolveWith(
+                  (states) => Colors.lightBlueAccent),
+              foregroundColor:
+                  MaterialStateProperty.resolveWith((states) => Colors.black),
             ),
           ),
           highlightDecoration: IntroHighlightDecoration(
@@ -69,37 +73,37 @@ class _NestedDemoPageState extends State<NestedDemoPage> {
             children: [
               Padding(
                 padding: const EdgeInsets.all(20),
-                child: Text.rich(TextSpan(
-                    children: [
-                      const TextSpan(
-                        text: "You can define multiple [Intro] widgets, "
-                            "and each one uses a separate [IntroController].\n\n"
-                            "Note:\n"
-                            "1. The same target widget may be used in different presentation processes.\n"
-                            "2. The same target widget can define different introduction card in different presentation flows.\n"
-                            "3. Each presentation flow is controlled through its own [IntroController].\n\n"
-                            "Presentation Flow 1: \n[ ",
-                      ),
-                      TextSpan(
-                        text: "Start",
-                        recognizer: TapGestureRecognizer()..onTap = () => introCtrl1.start(context),
-                        style: const TextStyle(
-                          color: Colors.blue,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const TextSpan(text: " ]\n\nPresentation Flow 2: \n[ "),
-                      TextSpan(
-                        text: "Start",
-                        recognizer: TapGestureRecognizer()..onTap = () => introCtrl2.start(context),
-                        style: const TextStyle(
-                          color: Colors.blue,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const TextSpan(text: " ]"),
-                    ]
-                )),
+                child: Text.rich(TextSpan(children: [
+                  const TextSpan(
+                    text: "You can define multiple [Intro] widgets, "
+                        "and each one uses a separate [IntroController].\n\n"
+                        "Note:\n"
+                        "1. The same target widget may be used in different presentation processes.\n"
+                        "2. The same target widget can define different introduction card in different presentation flows.\n"
+                        "3. Each presentation flow is controlled through its own [IntroController].\n\n"
+                        "Presentation Flow 1: \n[ ",
+                  ),
+                  TextSpan(
+                    text: "Start",
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () => introCtrl1.start(context),
+                    style: const TextStyle(
+                      color: Colors.blue,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const TextSpan(text: " ]\n\nPresentation Flow 2: \n[ "),
+                  TextSpan(
+                    text: "Start",
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () => introCtrl2.start(context),
+                    style: const TextStyle(
+                      color: Colors.blue,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const TextSpan(text: " ]"),
+                ])),
               ),
               const Divider(),
               Expanded(
@@ -205,7 +209,6 @@ class _NestedDemoPageState extends State<NestedDemoPage> {
 }
 
 class Block extends StatelessWidget {
-
   final String label;
   final Color color;
 
@@ -222,7 +225,8 @@ class Block extends StatelessWidget {
       height: 80,
       color: color,
       alignment: Alignment.center,
-      child: Text(label, style: const TextStyle(fontSize: 30, color: Colors.white)),
+      child: Text(label,
+          style: const TextStyle(fontSize: 30, color: Colors.white)),
     );
   }
 }

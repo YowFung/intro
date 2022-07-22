@@ -1,7 +1,6 @@
 part of intro;
 
 class Intro extends InheritedWidget {
-
   static Intro of(BuildContext context) {
     final instance = context.dependOnInheritedWidgetOfExactType<Intro>();
     if (instance == null) {
@@ -51,19 +50,19 @@ class Intro extends InheritedWidget {
     Duration? animationDuration,
     IntroHighlightDecoration? highlightDecoration,
     IntroCardDecoration? cardDecoration,
-  })
-      : assert(animationDuration == null || !animationDuration.isNegative),
+  })  : assert(animationDuration == null || !animationDuration.isNegative),
         _barrierColor = barrierColor ?? _defaultBarrierColor,
         _animationDuration = animationDuration ?? _defaultAnimationDuration,
-        _highlightDecoration = highlightDecoration ?? _defaultHighlightDecoration,
+        _highlightDecoration =
+            highlightDecoration ?? _defaultHighlightDecoration,
         _cardDecoration = cardDecoration ?? _defaultCardDecoration,
-        super(key: key, child: child)
-  {
+        super(key: key, child: child) {
     controller._intro = this;
   }
 
   @override
-  bool updateShouldNotify(covariant InheritedWidget oldWidget) => child != oldWidget.child;
+  bool updateShouldNotify(covariant InheritedWidget oldWidget) =>
+      child != oldWidget.child;
 
   void dispose() {
     controller.dispose();
