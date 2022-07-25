@@ -26,44 +26,28 @@ class _NestedDemoPageState extends State<NestedDemoPage> {
       appBar: AppBar(title: const Text("Nested Usage")),
       body: Intro(
         controller: introCtrl1,
-        cardDecoration: IntroCardDecoration(
+        cardDecoration: const IntroCardDecoration(
           showPreviousButton: false,
-          margin: const EdgeInsets.all(10),
-          textStyle: const TextStyle(
+          showCloseButton: false,
+          textStyle: TextStyle(
             color: Colors.lime,
             fontSize: 16,
           ),
           align: IntroCardAlign.outsideTopLeft,
-          nextButtonStyle: ButtonStyle(
-            shape: MaterialStateProperty.resolveWith(
-                (states) => const RoundedRectangleBorder()),
-            backgroundColor:
-                MaterialStateProperty.resolveWith((states) => Colors.lime),
-            foregroundColor:
-                MaterialStateProperty.resolveWith((states) => Colors.black),
-          ),
         ),
         highlightDecoration: IntroHighlightDecoration(
           border: Border.all(color: Colors.lime, width: 2),
         ),
         child: Intro(
           controller: introCtrl2,
-          cardDecoration: IntroCardDecoration(
+          cardDecoration: const IntroCardDecoration(
             showPreviousButton: false,
-            margin: const EdgeInsets.all(10),
-            textStyle: const TextStyle(
+            showCloseButton: false,
+            textStyle: TextStyle(
               color: Colors.lightBlueAccent,
               fontSize: 16,
             ),
             align: IntroCardAlign.outsideTopRight,
-            nextButtonStyle: ButtonStyle(
-              shape: MaterialStateProperty.resolveWith(
-                  (states) => const RoundedRectangleBorder()),
-              backgroundColor: MaterialStateProperty.resolveWith(
-                  (states) => Colors.lightBlueAccent),
-              foregroundColor:
-                  MaterialStateProperty.resolveWith((states) => Colors.black),
-            ),
           ),
           highlightDecoration: IntroHighlightDecoration(
             border: Border.all(color: Colors.lightBlueAccent, width: 2),
@@ -138,6 +122,9 @@ class _NestedDemoPageState extends State<NestedDemoPage> {
                             text: "Presentation Flow 2\n\n"
                                 "Step: 3/${introCtrl2.stepCount}",
                           ),
+                          cardDecoration: const IntroCardDecoration(
+                            showCloseButton: true,
+                          ),
                           child: const Block(
                             label: "B",
                             color: Colors.orange,
@@ -190,6 +177,9 @@ class _NestedDemoPageState extends State<NestedDemoPage> {
                         cardContents: TextSpan(
                           text: "Presentation Flow 1\n\n"
                               "Step: 5/${introCtrl1.stepCount}",
+                        ),
+                        cardDecoration: const IntroCardDecoration(
+                          showCloseButton: true,
                         ),
                         child: const Block(
                           label: "E",

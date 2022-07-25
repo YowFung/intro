@@ -233,14 +233,17 @@ class IntroController {
       startOpacity: _opening ? 0.0 : 1.0,
       endOpacity: _closing ? 0.0 : 1.0,
       onAnimationFinished: _onOverlayAnimationFinished,
-      child: Material(
-        type: MaterialType.transparency,
-        child: Stack(
-          children: [
-            _buildBorder(context),
-            _buildHighlight(context),
-            _buildCard(context),
-          ],
+      child: MaterialApp(
+        theme: ThemeData.dark(),
+        home: Material(
+          type: MaterialType.transparency,
+          child: Stack(
+            children: [
+              _buildBorder(context),
+              _buildHighlight(context),
+              _buildCard(context),
+            ],
+          ),
         ),
       ),
     );
@@ -254,6 +257,7 @@ class IntroController {
 
     final widget = params._state.widget;
     final rect = params.highlightRect;
+    final decoration = intro._highlightDecoration.mergeTo(widget.highlightDecoration);
     return AnimatedPositioned(
       duration: intro._animationDuration,
       left: rect.left,
@@ -264,13 +268,10 @@ class IntroController {
         duration: intro._animationDuration,
         width: rect.width,
         height: rect.height,
-        padding: widget.highlightDecoration?.padding ??
-            intro._highlightDecoration.padding,
+        padding: decoration.padding,
         decoration: BoxDecoration(
-          border: widget.highlightDecoration?.border ??
-              intro._highlightDecoration.border,
-          borderRadius: widget.highlightDecoration?.radius ??
-              intro._highlightDecoration.radius,
+          border: decoration.border,
+          borderRadius: decoration.radius,
         ),
       ),
     );
@@ -291,6 +292,7 @@ class IntroController {
 
           final rect = params.highlightRect;
           final widget = params._state.widget;
+          final decoration = intro._highlightDecoration.mergeTo(widget.highlightDecoration);
           return Stack(
             children: [
               AnimatedPositioned(
@@ -314,9 +316,7 @@ class IntroController {
                 width: rect.width,
                 height: rect.height,
                 child: MouseRegion(
-                  cursor: widget.highlightDecoration?.cursor ??
-                      intro._highlightDecoration.cursor ??
-                      MouseCursor.defer,
+                  cursor: decoration.cursor ?? MouseCursor.defer,
                   child: GestureDetector(
                     onTap: widget.onTargetTap,
                     child: AnimatedContainer(
@@ -324,10 +324,8 @@ class IntroController {
                       width: rect.width,
                       height: rect.height,
                       decoration: BoxDecoration(
-                        border: widget.highlightDecoration?.border ??
-                            intro._highlightDecoration.border,
-                        borderRadius: widget.highlightDecoration?.radius ??
-                            intro._highlightDecoration.radius,
+                        border: decoration.border,
+                        borderRadius: decoration.radius,
                         color: Colors.white,
                       ),
                     ),
@@ -349,7 +347,6 @@ class IntroController {
 
     final widget = params._state.widget;
     final rect = params.cardRect;
-    final decoration = widget.cardDecoration ?? intro._cardDecoration;
 
     final screen = params._state._physicalSize;
     final left = rect.left.isInfinite ? null : rect.left;
@@ -358,6 +355,9 @@ class IntroController {
     final bottom =
         rect.bottom.isInfinite ? null : (screen.height - rect.bottom);
 
+    final decoration = intro._cardDecoration
+        .mergeTo(widget.cardDecoration)
+        .mergeTo(IntroCardDecoration(align: params.actualCardAlign));
     return Positioned(
       left: left,
       right: right,

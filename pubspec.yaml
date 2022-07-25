@@ -1,7 +1,6 @@
 name: intro
 description: A package of Flutter that provides application wizard functionality.
-version: 1.0.2
-publisher: pub.yowfung.cn
+version: 1.0.3
 homepage: "https://github.com/YowFung/intro"
 
 environment:

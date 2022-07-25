@@ -9,7 +9,13 @@ class GeneralDemoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Intro(
-      controller: IntroController(stepCount: 13), // 13 means it has 13 steps.
+      controller: IntroController(stepCount: 13),
+      cardDecoration: const IntroCardDecoration(
+        showPreviousButton: true,
+        showNextButton: true,
+        showCloseButton: false,
+        autoHideDisabledButton: true,
+      ),
       child: const _IntroDemo(),
     );
   }
@@ -61,7 +67,7 @@ class _IntroDemoState extends State<_IntroDemo> {
                 cardContents: const TextSpan(
                   text: "Welcome to use this package!\n\n"
                       "This is the first step.\n"
-                      "Now, please click <Next> button to continue.",
+                      "Now, please click the <Next> button to continue.",
                 ),
                 child: Container(
                   width: 120,
@@ -76,7 +82,7 @@ class _IntroDemoState extends State<_IntroDemo> {
                 step: 2,
                 controller: _intro!.controller,
                 cardContents: const TextSpan(
-                  text: "This is non-first step.\n\n"
+                  text: "This is not for the first step.\n\n"
                       "It automatically displays the previous button by default. But\n"
                       "you are free to specify whether it is displayed or not. I will\n"
                       "introduce it to you in the next step.\n\n"
@@ -111,7 +117,6 @@ class _IntroDemoState extends State<_IntroDemo> {
                   autoHideDisabledButton: false,
                   previousButtonLabel: "Back",
                   nextButtonLabel: "Continue",
-                  nextButtonFinishLabel: "Complete",
                   closeButtonLabel: "Close",
                   nextButtonStyle: ButtonStyle(
                     backgroundColor: MaterialStateColor.resolveWith(
@@ -166,7 +171,6 @@ class _IntroDemoState extends State<_IntroDemo> {
                     fontSize: 16,
                     color: Colors.amber,
                   ),
-                  showPreviousButton: true,
                   previousButtonStyle: ButtonStyle(
                     shape: MaterialStateProperty.resolveWith(
                         (states) => const RoundedRectangleBorder()),
@@ -304,14 +308,10 @@ class _IntroDemoState extends State<_IntroDemo> {
                 ),
                 cardDecoration: const IntroCardDecoration(
                   align: IntroCardAlign.insideBottomRight,
-                  margin: EdgeInsets.all(20),
                   padding: EdgeInsets.all(10),
                   backgroundColor: Colors.black38,
-                  radius: BorderRadius.all(Radius.circular(4)),
-                  showPreviousButton: true,
                 ),
                 highlightDecoration: const IntroHighlightDecoration(
-                  padding: EdgeInsets.all(2),
                   border: Border.fromBorderSide(BorderSide.none),
                   radius: BorderRadius.zero,
                 ),
@@ -611,8 +611,9 @@ class _IntroDemoState extends State<_IntroDemo> {
                 cardContents: TextSpan(children: [
                   const TextSpan(
                       text: "Congratulations on coming the last step.\n\n"
-                          "You can find that the label of <Next> button has been became\n"
-                          "to  <Finish> automatically. Click it to close this presentation flow.\n\n"
+                          "You can find that the <Next> button is disabled if [autoHideDisabledButton]\n"
+                          "is set to false, and the label of <Close> button has been became to <Finish>\n"
+                          "automatically.\n\n"
                           "By the way, you can jump to any step via the [IntroController]. Try\n"
                           "to tap the following links back to a former step.\n\n"),
                   TextSpan(
@@ -640,6 +641,10 @@ class _IntroDemoState extends State<_IntroDemo> {
                   ),
                   const TextSpan(text: " 👈\n"),
                 ]),
+                cardDecoration: const IntroCardDecoration(
+                  autoHideDisabledButton: false,
+                  showCloseButton: true,
+                ),
                 child: Container(
                   width: 120,
                   height: 80,

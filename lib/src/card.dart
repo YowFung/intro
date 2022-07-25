@@ -4,8 +4,7 @@ class IntroStepCard extends StatelessWidget {
   static IntroCardBuilder _buildDefaultCard(TextSpan contents) {
     return (BuildContext context, IntroParams params,
         IntroCardDecoration decoration) {
-      final style = params._state.widget.cardDecoration?.textStyle ??
-          params.controller.intro._cardDecoration.textStyle;
+      final decoration = params.controller.intro._cardDecoration.mergeTo(params._state.widget.cardDecoration);
       final cardAlign = params.actualCardAlign;
       final textAlignToRight = [
         IntroCardAlign.insideTopRight,
@@ -19,8 +18,8 @@ class IntroStepCard extends StatelessWidget {
         params: params,
         child: Text.rich(
           contents,
-          style: style,
-          textAlign: textAlignToRight ? TextAlign.right : TextAlign.left,
+          style: decoration.textStyle,
+          textAlign: decoration.size == null && textAlignToRight ? TextAlign.right : TextAlign.left,
         ),
       );
     };
@@ -38,8 +37,7 @@ class IntroStepCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = params.controller;
-    final decoration =
-        params._state.widget.cardDecoration ?? controller.intro._cardDecoration;
+    final decoration = controller.intro._cardDecoration.mergeTo(params._state.widget.cardDecoration);
 
     return Container(
       width: decoration.size?.width,
@@ -52,14 +50,12 @@ class IntroStepCard extends StatelessWidget {
       ),
       child: Builder(
         builder: (context) {
-          final showPreviousButton = decoration.showPreviousButton &&
-              (!decoration.autoHideDisabledButton ||
-                  controller.hasPreviousStep);
-          final showNextButton = decoration.showNextButton &&
-              (!decoration.autoHideDisabledButton ||
-                  controller.hasNextStep ||
-                  controller.isLastStep);
-          final showCloseButton = decoration.showCloseButton;
+          final autoHide = decoration.autoHideDisabledButton ?? true;
+          final showPrevious = decoration.showPreviousButton ?? true;
+          final showNext = decoration.showNextButton ?? true;
+          final showPreviousButton = showPrevious && (!autoHide || controller.hasPreviousStep);
+          final showNextButton = showNext && (!autoHide || controller.hasNextStep);
+          final showCloseButton = decoration.showCloseButton ?? true;
 
           final children = <Widget>[];
 
@@ -68,27 +64,21 @@ class IntroStepCard extends StatelessWidget {
               onPressed:
                   controller.hasPreviousStep ? controller.previous : null,
               style: decoration.previousButtonStyle,
-              child: Text(decoration.previousButtonLabel),
+              child: Text(decoration.previousButtonLabel ?? "Previous"),
             ));
           }
           if (showCloseButton) {
             children.add(ElevatedButton(
               onPressed: controller.close,
               style: decoration.closeButtonStyle,
-              child: Text(decoration.closeButtonLabel),
+              child: Text(decoration.closeButtonLabel ?? (controller.isLastStep ? "Finish" : "Close")),
             ));
           }
           if (showNextButton) {
             children.add(ElevatedButton(
-              onPressed: controller.hasNextStep
-                  ? controller.next
-                  : controller.isLastStep
-                      ? controller.close
-                      : null,
+              onPressed: controller.hasNextStep ? controller.next : null,
               style: decoration.nextButtonStyle,
-              child: Text(controller.isLastStep
-                  ? decoration.nextButtonFinishLabel
-                  : decoration.nextButtonLabel),
+              child: Text(decoration.nextButtonLabel ?? "Next"),
             ));
           }
 
@@ -96,6 +86,7 @@ class IntroStepCard extends StatelessWidget {
             return child;
           }
 
+          final nonSize = decoration.size == null;
           final alignToRight = [
             IntroCardAlign.insideTopRight,
             IntroCardAlign.insideBottomRight,
@@ -118,11 +109,12 @@ class IntroStepCard extends StatelessWidget {
           }
 
           return Column(
-            crossAxisAlignment: alignToRight
+            crossAxisAlignment: nonSize && alignToRight
                 ? CrossAxisAlignment.end
                 : CrossAxisAlignment.start,
-            mainAxisAlignment:
-                alignToBottom ? MainAxisAlignment.end : MainAxisAlignment.start,
+            mainAxisAlignment: nonSize && alignToBottom
+                ? MainAxisAlignment.end
+                : MainAxisAlignment.start,
             children: [
               child,
               const SizedBox(height: 20),

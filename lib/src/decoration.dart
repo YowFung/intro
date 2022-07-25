@@ -15,6 +15,19 @@ class IntroHighlightDecoration {
     this.padding,
     this.cursor,
   });
+
+  IntroHighlightDecoration mergeTo(IntroHighlightDecoration? other) {
+    if (other == null) {
+      return this;
+    }
+
+    return IntroHighlightDecoration(
+      border: other.border ?? border,
+      radius: other.radius ?? radius,
+      padding: other.padding ?? padding,
+      cursor:  other.cursor ?? cursor,
+    );
+  }
 }
 
 class IntroCardDecoration {
@@ -34,21 +47,19 @@ class IntroCardDecoration {
 
   final TextStyle? textStyle;
 
-  final bool showPreviousButton;
+  final bool? showPreviousButton;
 
-  final bool showNextButton;
+  final bool? showNextButton;
 
-  final bool showCloseButton;
+  final bool? showCloseButton;
 
-  final String previousButtonLabel;
+  final String? previousButtonLabel;
 
-  final String nextButtonLabel;
+  final String? nextButtonLabel;
 
-  final String nextButtonFinishLabel;
+  final String? closeButtonLabel;
 
-  final String closeButtonLabel;
-
-  final bool autoHideDisabledButton;
+  final bool? autoHideDisabledButton;
 
   final ButtonStyle? previousButtonStyle;
 
@@ -65,16 +76,42 @@ class IntroCardDecoration {
     this.radius,
     this.backgroundColor,
     this.textStyle,
-    this.showPreviousButton = false,
-    this.showNextButton = true,
-    this.showCloseButton = false,
-    this.previousButtonLabel = "Previous",
-    this.nextButtonLabel = "Next",
-    this.nextButtonFinishLabel = "Finish",
-    this.closeButtonLabel = "Close",
+    this.showPreviousButton,
+    this.showNextButton,
+    this.showCloseButton,
+    this.previousButtonLabel,
+    this.nextButtonLabel,
+    this.closeButtonLabel,
     this.autoHideDisabledButton = true,
     this.previousButtonStyle,
     this.nextButtonStyle,
     this.closeButtonStyle,
   });
+
+  IntroCardDecoration mergeTo(IntroCardDecoration? other) {
+    if (other == null) {
+      return this;
+    }
+
+    return IntroCardDecoration(
+      align: other.align ?? align,
+      size: other.size ?? size,
+      margin: other.margin ?? margin,
+      padding: other.padding ?? padding,
+      border: other.border ?? border,
+      radius: other.radius ?? radius,
+      backgroundColor: other.backgroundColor ?? backgroundColor,
+      textStyle: other.textStyle?.merge(textStyle) ?? textStyle,
+      showPreviousButton: other.showPreviousButton ?? showPreviousButton,
+      showNextButton: other.showNextButton ?? showNextButton,
+      showCloseButton: other.showCloseButton ?? showCloseButton,
+      previousButtonLabel: other.previousButtonLabel ?? previousButtonLabel,
+      nextButtonLabel: other.nextButtonLabel ?? nextButtonLabel,
+      closeButtonLabel: other.closeButtonLabel ?? closeButtonLabel,
+      autoHideDisabledButton: other.autoHideDisabledButton ?? autoHideDisabledButton,
+      previousButtonStyle: other.previousButtonStyle?.merge(previousButtonStyle) ?? previousButtonStyle,
+      nextButtonStyle: other.nextButtonStyle?.merge(nextButtonStyle) ?? nextButtonStyle,
+      closeButtonStyle: other.closeButtonStyle?.merge(closeButtonStyle) ?? closeButtonStyle,
+    );
+  }
 }

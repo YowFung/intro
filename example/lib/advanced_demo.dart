@@ -169,9 +169,7 @@ class _AdvancedDemoPageState extends State<AdvancedDemoPage> {
       controller: introCtrl,
       cardDecoration: IntroCardDecoration(
         align: IntroCardAlign.outsideBottomLeft,
-        margin: const EdgeInsets.all(10),
         showPreviousButton: false,
-        showCloseButton: true,
         nextButtonStyle: ButtonStyle(
           shape: MaterialStateProperty.resolveWith(
               (states) => const RoundedRectangleBorder()),
@@ -263,9 +261,6 @@ class _AdvancedDemoPageState extends State<AdvancedDemoPage> {
                 cardContents: TextSpan(
                   text: "Step: 6/${introCtrl.stepCount}\n\n"
                       "This is the last step.\nPlease exit this page.",
-                ),
-                cardDecoration: const IntroCardDecoration(
-                  showCloseButton: false,
                 ),
                 highlightDecoration: const IntroHighlightDecoration(
                   cursor: MouseCursor.defer,
