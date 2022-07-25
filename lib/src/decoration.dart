@@ -25,7 +25,7 @@ class IntroHighlightDecoration {
       border: other.border ?? border,
       radius: other.radius ?? radius,
       padding: other.padding ?? padding,
-      cursor:  other.cursor ?? cursor,
+      cursor: other.cursor ?? cursor,
     );
   }
 }
@@ -108,10 +108,15 @@ class IntroCardDecoration {
       previousButtonLabel: other.previousButtonLabel ?? previousButtonLabel,
       nextButtonLabel: other.nextButtonLabel ?? nextButtonLabel,
       closeButtonLabel: other.closeButtonLabel ?? closeButtonLabel,
-      autoHideDisabledButton: other.autoHideDisabledButton ?? autoHideDisabledButton,
-      previousButtonStyle: other.previousButtonStyle?.merge(previousButtonStyle) ?? previousButtonStyle,
-      nextButtonStyle: other.nextButtonStyle?.merge(nextButtonStyle) ?? nextButtonStyle,
-      closeButtonStyle: other.closeButtonStyle?.merge(closeButtonStyle) ?? closeButtonStyle,
+      autoHideDisabledButton:
+          other.autoHideDisabledButton ?? autoHideDisabledButton,
+      previousButtonStyle:
+          other.previousButtonStyle?.merge(previousButtonStyle) ??
+              previousButtonStyle,
+      nextButtonStyle:
+          other.nextButtonStyle?.merge(nextButtonStyle) ?? nextButtonStyle,
+      closeButtonStyle:
+          other.closeButtonStyle?.merge(closeButtonStyle) ?? closeButtonStyle,
     );
   }
 }

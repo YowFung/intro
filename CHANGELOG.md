@@ -1,3 +1,7 @@
+## 1.0.4
+
+* The close button is displayed by default in the last step.
+
 ## 1.0.3
 
 * Decoration inheritable.

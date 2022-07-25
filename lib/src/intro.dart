@@ -52,7 +52,8 @@ class Intro extends InheritedWidget {
   })  : assert(animationDuration == null || !animationDuration.isNegative),
         _barrierColor = barrierColor ?? _defaultBarrierColor,
         _animationDuration = animationDuration ?? _defaultAnimationDuration,
-        _highlightDecoration = _defaultHighlightDecoration.mergeTo(highlightDecoration),
+        _highlightDecoration =
+            _defaultHighlightDecoration.mergeTo(highlightDecoration),
         _cardDecoration = _defaultCardDecoration.mergeTo(cardDecoration),
         super(key: key, child: child) {
     controller._intro = this;

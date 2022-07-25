@@ -4,7 +4,8 @@ class IntroStepCard extends StatelessWidget {
   static IntroCardBuilder _buildDefaultCard(TextSpan contents) {
     return (BuildContext context, IntroParams params,
         IntroCardDecoration decoration) {
-      final decoration = params.controller.intro._cardDecoration.mergeTo(params._state.widget.cardDecoration);
+      final decoration = params.controller.intro._cardDecoration
+          .mergeTo(params._state.widget.cardDecoration);
       final cardAlign = params.actualCardAlign;
       final textAlignToRight = [
         IntroCardAlign.insideTopRight,
@@ -19,7 +20,9 @@ class IntroStepCard extends StatelessWidget {
         child: Text.rich(
           contents,
           style: decoration.textStyle,
-          textAlign: decoration.size == null && textAlignToRight ? TextAlign.right : TextAlign.left,
+          textAlign: decoration.size == null && textAlignToRight
+              ? TextAlign.right
+              : TextAlign.left,
         ),
       );
     };
@@ -37,7 +40,8 @@ class IntroStepCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = params.controller;
-    final decoration = controller.intro._cardDecoration.mergeTo(params._state.widget.cardDecoration);
+    final decoration = controller.intro._cardDecoration
+        .mergeTo(params._state.widget.cardDecoration);
 
     return Container(
       width: decoration.size?.width,
@@ -50,12 +54,15 @@ class IntroStepCard extends StatelessWidget {
       ),
       child: Builder(
         builder: (context) {
-          final autoHide = decoration.autoHideDisabledButton ?? true;
+          final autoHide = decoration.autoHideDisabledButton ?? false;
           final showPrevious = decoration.showPreviousButton ?? true;
           final showNext = decoration.showNextButton ?? true;
-          final showPreviousButton = showPrevious && (!autoHide || controller.hasPreviousStep);
-          final showNextButton = showNext && (!autoHide || controller.hasNextStep);
-          final showCloseButton = decoration.showCloseButton ?? true;
+          final showPreviousButton =
+              showPrevious && (!autoHide || controller.hasPreviousStep);
+          final showNextButton =
+              showNext && (!autoHide || controller.hasNextStep);
+          final showCloseButton =
+              decoration.showCloseButton ?? controller.isLastStep;
 
           final children = <Widget>[];
 
@@ -71,7 +78,8 @@ class IntroStepCard extends StatelessWidget {
             children.add(ElevatedButton(
               onPressed: controller.close,
               style: decoration.closeButtonStyle,
-              child: Text(decoration.closeButtonLabel ?? (controller.isLastStep ? "Finish" : "Close")),
+              child: Text(decoration.closeButtonLabel ??
+                  (controller.isLastStep ? "Finish" : "Close")),
             ));
           }
           if (showNextButton) {

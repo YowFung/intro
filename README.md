@@ -1,8 +1,6 @@
 # intro
 
-An application wizard package. 
-
-With this package, you can implement a step-by-step guide to help you demonstrate your software or introduce your product.
+A step-by-step wizard, which can help you to introduce your product or to demonstrate the usage of your application.
 
 ## Features
 

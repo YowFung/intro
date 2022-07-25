@@ -67,7 +67,6 @@ class _GradualOpacityState extends State<_GradualOpacity> {
   }
 }
 
-/// 控制显示步骤的控制器。
 class IntroController {
   final int stepCount;
 
@@ -257,7 +256,8 @@ class IntroController {
 
     final widget = params._state.widget;
     final rect = params.highlightRect;
-    final decoration = intro._highlightDecoration.mergeTo(widget.highlightDecoration);
+    final decoration =
+        intro._highlightDecoration.mergeTo(widget.highlightDecoration);
     return AnimatedPositioned(
       duration: intro._animationDuration,
       left: rect.left,
@@ -292,7 +292,8 @@ class IntroController {
 
           final rect = params.highlightRect;
           final widget = params._state.widget;
-          final decoration = intro._highlightDecoration.mergeTo(widget.highlightDecoration);
+          final decoration =
+              intro._highlightDecoration.mergeTo(widget.highlightDecoration);
           return Stack(
             children: [
               AnimatedPositioned(
