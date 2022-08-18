@@ -84,11 +84,11 @@ Globally effective:
 ```dart
 Intro(
   cardDecoration: IntroCardDecoration(
-  	// TODO:
+    // TODO:
     // Some attributes that need to be specifically specified.
     // For missing attributes , they will use its default value.
   ),
-	// ...
+  // ...
 );
 ```
 
@@ -98,7 +98,7 @@ Only effective for specific step:
 IntroStepTarget(
   cardDecoration: IntroCardDecoration(
     // TODO:
-  	// Some attributes that need to be specifically specified.
+    // Some attributes that need to be specifically specified.
     // For missing attributes , they will use global value (be specified in `Intro`).
   ),
   // ...
@@ -140,11 +140,11 @@ Globally effective:
 ```dart
 Intro(
   highlightDecoration: IntroHighlightDecoration(
-  	// TODO:
+    // TODO:
     // Some attributes that need to be specifically specified.
     // For missing attributes , they will use its default value.
   ),
-	// ...
+  // ...
 );
 ```
 
@@ -154,7 +154,7 @@ Only effective for specific step:
 IntroStepTarget(
   highlightDecoration: IntroHighlightDecoration(
     // TODO:
-  	// Some attributes that need to be specifically specified.
+    // Some attributes that need to be specifically specified.
     // For missing attributes , they will use global value (be specified in `Intro`).
   ),
   // ...
@@ -333,11 +333,11 @@ final controller2 = IntroController(stepCount: 3);
 
 ```dart
 Intro(
-	controller: controller1,
-	child: Intro(
-		controller: controller2,
-		child: MyApp(),
-	),
+  controller: controller1,
+  child: Intro(
+    controller: controller2,
+    child: MyApp(),
+  ),
 );
 ```
 
@@ -347,11 +347,11 @@ Intro(
 
 ```dart
 IntroStepTarget(
-	controller: controller1,
+  controller: controller1,
   step: 1,
   // ...
   child: IntroStepTarget(
-  	controller: controller2,
+    controller: controller2,
     step: 3,
     // ...
     child: targetChild,
@@ -371,7 +371,7 @@ Change barrier color or animation duration.
 Intro(
   barrierColor: Colors.black87,
   animationDuration: Duration(milliseconds: 500),
-	// ...
+  // ...
 );
 ```
 
