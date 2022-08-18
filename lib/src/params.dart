@@ -46,16 +46,16 @@ class IntroParams {
 
   IntroParams._(this._state);
 
-  /// Step of this params.
+  /// The step number for this `IntroStepTarget`.
   int get step => _state.widget.step;
 
-  /// [IntroController] of this step.
+  /// The controller for this demo flow.
   IntroController get controller => _state.widget.controller;
 
-  /// [BuildContext] of [IntroStepTarget] widget of this step.
+  /// The context for the `IntroStepTarget` widget of this step.
   BuildContext get context => controller.getStepKey(step).currentContext!;
 
-  /// Geometry of the target widget (child of [IntroStepTarget]) for this step.
+  /// The geometry for the target widget of this step.
   Rect get targetRect {
     final box = context.findRenderObject() as RenderBox;
     final offset = box.localToGlobal(Offset.zero);
@@ -63,26 +63,26 @@ class IntroParams {
     return Rect.fromPoints(offset, size.bottomRight(offset));
   }
 
-  /// Geometry of highlighted area (the hole above the target widget) for this step.
+  /// The geometry for the highlighted area of this step.
   Rect get highlightRect {
     final rect = targetRect;
     final padding = _state.widget.highlightDecoration?.padding ??
-        controller.intro._highlightDecoration.padding ??
+        controller.intro.highlightDecoration.padding ??
         EdgeInsets.zero;
     final startPoint = rect.topLeft - Offset(padding.left, padding.top);
     final endPoint = rect.bottomRight + Offset(padding.right, padding.bottom);
     return Rect.fromPoints(startPoint, endPoint);
   }
 
-  /// Geometry of the introduction card widget for this step.
+  /// The geometry for the intro card widget of this step.
   Rect get cardRect {
     final highlight = highlightRect;
     final screen = _state._physicalSize;
     final margin = _state.widget.cardDecoration?.margin ??
-        controller.intro._cardDecoration.margin ??
+        controller.intro.cardDecoration.margin ??
         const EdgeInsets.all(10);
     var align = _state.widget.cardDecoration?.align ??
-        controller.intro._cardDecoration.align;
+        controller.intro.cardDecoration.align;
 
     final mLeft = margin.left;
     final mRight = margin.right;
@@ -109,18 +109,18 @@ class IntroParams {
         final hWidth = highlight.width;
         final hHeight = highlight.height;
         final areaMap = {
-          IntroCardAlign.outsideTopLeft: topBlank * (hWidth + rightBlank),
-          IntroCardAlign.outsideTopRight: topBlank * (leftBlank + hWidth),
           IntroCardAlign.outsideBottomLeft: bottomBlank * (hWidth + rightBlank),
           IntroCardAlign.outsideBottomRight: bottomBlank * (leftBlank + hWidth),
-          IntroCardAlign.outsideLeftTop: leftBlank * (hHeight + bottomBlank),
-          IntroCardAlign.outsideLeftBottom: leftBlank * (topBlank + hHeight),
+          IntroCardAlign.outsideTopLeft: topBlank * (hWidth + rightBlank),
+          IntroCardAlign.outsideTopRight: topBlank * (leftBlank + hWidth),
           IntroCardAlign.outsideRightTop: rightBlank * (hHeight + bottomBlank),
           IntroCardAlign.outsideRightBottom: rightBlank * (topBlank + hHeight),
+          IntroCardAlign.outsideLeftTop: leftBlank * (hHeight + bottomBlank),
+          IntroCardAlign.outsideLeftBottom: leftBlank * (topBlank + hHeight),
         };
         final sortedKey = areaMap.keys.toList()
-          ..sort((k1, k2) => areaMap[k1]!.compareTo(areaMap[k2]!));
-        align = sortedKey.last;
+          ..sort((k1, k2) => areaMap[k2]!.compareTo(areaMap[k1]!));
+        align = sortedKey.first;
         _cardAlign = align;
       }
     }
@@ -163,13 +163,13 @@ class IntroParams {
     }
   }
 
-  /// The final alignment of introduction card widget relative to highlighted widget.
+  /// The final alignment of the intro card widget that relative to the highlighted widget.
   ///
-  /// If you don't give it when you build the [IntroStepTarget] or [IntroApp],
+  /// If you don't specific it when you build the [IntroStepTarget] or [Intro] widget,
   /// it will be computed automatically after you access the [cardRect] attribute.
   IntroCardAlign? get actualCardAlign =>
       _state.widget.cardDecoration?.align ??
-      controller.intro._cardDecoration.align ??
+      controller.intro.cardDecoration.align ??
       _cardAlign;
 
   @override

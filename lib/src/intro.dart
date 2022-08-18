@@ -1,5 +1,8 @@
 part of intro;
 
+/// Demo flow widget.
+///
+/// Please register this widget at the earliest possible widget tree node.
 class Intro extends InheritedWidget {
   static Intro of(BuildContext context) {
     final instance = context.dependOnInheritedWidgetOfExactType<Intro>();
@@ -34,12 +37,13 @@ class Intro extends InheritedWidget {
     ),
   );
 
+  /// The controller of this demo flow.
   final IntroController controller;
 
-  final Color _barrierColor;
-  final Duration _animationDuration;
-  final IntroHighlightDecoration _highlightDecoration;
-  final IntroCardDecoration _cardDecoration;
+  final Color barrierColor;
+  final Duration animationDuration;
+  final IntroHighlightDecoration highlightDecoration;
+  final IntroCardDecoration cardDecoration;
 
   Intro({
     Key? key,
@@ -50,11 +54,11 @@ class Intro extends InheritedWidget {
     IntroHighlightDecoration? highlightDecoration,
     IntroCardDecoration? cardDecoration,
   })  : assert(animationDuration == null || !animationDuration.isNegative),
-        _barrierColor = barrierColor ?? _defaultBarrierColor,
-        _animationDuration = animationDuration ?? _defaultAnimationDuration,
-        _highlightDecoration =
+        barrierColor = barrierColor ?? _defaultBarrierColor,
+        animationDuration = animationDuration ?? _defaultAnimationDuration,
+        highlightDecoration =
             _defaultHighlightDecoration.mergeTo(highlightDecoration),
-        _cardDecoration = _defaultCardDecoration.mergeTo(cardDecoration),
+        cardDecoration = _defaultCardDecoration.mergeTo(cardDecoration),
         super(key: key, child: child) {
     controller._intro = this;
   }

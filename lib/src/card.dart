@@ -1,10 +1,11 @@
 part of intro;
 
+/// Default intro card.
 class IntroStepCard extends StatelessWidget {
   static IntroCardBuilder _buildDefaultCard(TextSpan contents) {
     return (BuildContext context, IntroParams params,
         IntroCardDecoration decoration) {
-      final decoration = params.controller.intro._cardDecoration
+      final decoration = params.controller.intro.cardDecoration
           .mergeTo(params._state.widget.cardDecoration);
       final cardAlign = params.actualCardAlign;
       final textAlignToRight = [
@@ -40,7 +41,7 @@ class IntroStepCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = params.controller;
-    final decoration = controller.intro._cardDecoration
+    final decoration = controller.intro.cardDecoration
         .mergeTo(params._state.widget.cardDecoration);
 
     return Container(
@@ -54,7 +55,7 @@ class IntroStepCard extends StatelessWidget {
       ),
       child: Builder(
         builder: (context) {
-          final autoHide = decoration.autoHideDisabledButton ?? false;
+          final autoHide = decoration.autoHideDisabledButtons ?? true;
           final showPrevious = decoration.showPreviousButton ?? true;
           final showNext = decoration.showNextButton ?? true;
           final showPreviousButton =

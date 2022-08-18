@@ -67,7 +67,9 @@ class _GradualOpacityState extends State<_GradualOpacity> {
   }
 }
 
+/// The controller of demo flow.
 class IntroController {
+  /// The total number of steps.
   final int stepCount;
 
   Intro? _intro;
@@ -90,6 +92,7 @@ class IntroController {
 
   bool get mounted => stepCount > 0 && _keys.length == stepCount;
 
+  /// The `Intro` instance it's attached to.
   Intro get intro {
     if (_intro == null) {
       throw IntroException("Can not get identity of this controller. "
@@ -98,33 +101,40 @@ class IntroController {
     return _intro!;
   }
 
+  /// Whether the demo flow is running.
   bool get isOpened => _isOpened;
 
+  /// The code of current step.
   int get currentStep {
     assert(_debugAssertNotDisposed());
     return _currentStep;
   }
 
+  /// Whether has next step.
   bool get hasNextStep {
     assert(_debugAssertNotDisposed());
     return currentStep < stepCount;
   }
 
+  /// Whether has previous step.
   bool get hasPreviousStep {
     assert(_debugAssertNotDisposed());
     return currentStep > 1;
   }
 
+  /// Whether the current step is the first step.
   bool get isFirstStep {
     assert(_debugAssertNotDisposed());
     return currentStep == 1;
   }
 
+  /// Whether the current step is the last step.
   bool get isLastStep {
     assert(_debugAssertNotDisposed());
     return currentStep == stepCount;
   }
 
+  /// The [GlobalKey] of the highlighted widget for this step.
   GlobalKey? get currentStepKey {
     assert(_debugAssertNotDisposed());
     return currentStep == 0 ? null : _keys[currentStep - 1];
@@ -164,6 +174,7 @@ class IntroController {
     return true;
   }
 
+  /// Get the [GlobalKey] of the specified [step].
   GlobalKey getStepKey(int step) {
     assert(_debugAssertNotDisposed());
     if (!_keys.containsKey(step)) {
@@ -228,7 +239,7 @@ class IntroController {
 
   Widget _buildOverlay(BuildContext context) {
     return _GradualOpacity(
-      duration: intro._animationDuration,
+      duration: intro.animationDuration,
       startOpacity: _opening ? 0.0 : 1.0,
       endOpacity: _closing ? 0.0 : 1.0,
       onAnimationFinished: _onOverlayAnimationFinished,
@@ -257,15 +268,15 @@ class IntroController {
     final widget = params._state.widget;
     final rect = params.highlightRect;
     final decoration =
-        intro._highlightDecoration.mergeTo(widget.highlightDecoration);
+        intro.highlightDecoration.mergeTo(widget.highlightDecoration);
     return AnimatedPositioned(
-      duration: intro._animationDuration,
+      duration: intro.animationDuration,
       left: rect.left,
       top: rect.top,
       width: rect.width,
       height: rect.height,
       child: AnimatedContainer(
-        duration: intro._animationDuration,
+        duration: intro.animationDuration,
         width: rect.width,
         height: rect.height,
         padding: decoration.padding,
@@ -280,7 +291,7 @@ class IntroController {
   Widget _buildHighlight(BuildContext context) {
     return ColorFiltered(
       colorFilter: ColorFilter.mode(
-        intro._barrierColor,
+        intro.barrierColor,
         BlendMode.srcOut,
       ),
       child: Builder(
@@ -293,25 +304,37 @@ class IntroController {
           final rect = params.highlightRect;
           final widget = params._state.widget;
           final decoration =
-              intro._highlightDecoration.mergeTo(widget.highlightDecoration);
+              intro.highlightDecoration.mergeTo(widget.highlightDecoration);
           return Stack(
             children: [
               AnimatedPositioned(
-                duration: intro._animationDuration,
+                duration: intro.animationDuration,
                 left: 0,
                 right: 0,
                 top: 0,
                 bottom: 0,
                 child: AnimatedContainer(
-                  duration: intro._animationDuration,
+                  duration: intro.animationDuration,
                   decoration: const BoxDecoration(
                     color: Colors.white,
                     backgroundBlendMode: BlendMode.dstOut,
                   ),
+                  child: GestureDetector(
+                    onTap: () {
+                      final decoration = _intro?.cardDecoration.mergeTo(
+                          _getCurrentStepParams()
+                              ?._state
+                              .widget
+                              .cardDecoration);
+                      if (decoration?.tapBarrierToContinue == true) {
+                        next();
+                      }
+                    },
+                  ),
                 ),
               ),
               AnimatedPositioned(
-                duration: intro._animationDuration,
+                duration: intro.animationDuration,
                 left: rect.left,
                 top: rect.top,
                 width: rect.width,
@@ -319,9 +342,9 @@ class IntroController {
                 child: MouseRegion(
                   cursor: decoration.cursor ?? MouseCursor.defer,
                   child: GestureDetector(
-                    onTap: widget.onTargetTap,
+                    onTap: widget.onHighlightTap,
                     child: AnimatedContainer(
-                      duration: intro._animationDuration,
+                      duration: intro.animationDuration,
                       width: rect.width,
                       height: rect.height,
                       decoration: BoxDecoration(
@@ -356,7 +379,7 @@ class IntroController {
     final bottom =
         rect.bottom.isInfinite ? null : (screen.height - rect.bottom);
 
-    final decoration = intro._cardDecoration
+    final decoration = intro.cardDecoration
         .mergeTo(widget.cardDecoration)
         .mergeTo(IntroCardDecoration(align: params.actualCardAlign));
     return Positioned(
@@ -365,13 +388,16 @@ class IntroController {
       top: top,
       bottom: bottom,
       child: _GradualOpacity(
-        duration: intro._animationDuration,
+        duration: intro.animationDuration,
         startOpacity: _switching ? 1.0 : 0.0,
         child: widget.cardBuilder(context, params, decoration),
       ),
     );
   }
 
+  /// Destroy this demo flow.
+  ///
+  /// When it destroyed, it can never be used again.
   void dispose() {
     if (!mounted) return;
 
@@ -405,6 +431,11 @@ class IntroController {
     }
   }
 
+  /// Start this demo flow.
+  ///
+  /// It begin from step 1 by default. But you can specify the initial step through the [initStep].
+  ///
+  /// Note that the [context] you give must be the context of a widget after the [Intro] is defined.
   Future<void> start(
     BuildContext context, {
     int initStep = 1,
@@ -434,6 +465,7 @@ class IntroController {
     await Future(() => Overlay.of(context)!.insert(_overlayEntry!));
   }
 
+  /// Close the demo flow.
   Future<void> close() async {
     assert(_debugAssertNotDisposed());
     if (!_isOpened) return;
@@ -443,6 +475,7 @@ class IntroController {
     refresh();
   }
 
+  /// Jump this demo flow to the [step].
   Future<void> jumpTo(int step) async {
     assert(_debugAssertNotDisposed());
     assert(_debugAssertOpened());
@@ -452,6 +485,9 @@ class IntroController {
     await _switchStep(_currentStep, step);
   }
 
+  /// Jump this demo flow to next step.
+  ///
+  /// It's equivalent to [close] if called at the last step.
   Future<void> next() async {
     assert(_debugAssertNotDisposed());
     assert(_debugAssertOpened());
@@ -463,6 +499,7 @@ class IntroController {
     await _switchStep(_currentStep, _currentStep + 1);
   }
 
+  /// Jump this demo flow to previous step if not at the first step.
   Future<void> previous() async {
     assert(_debugAssertNotDisposed());
     assert(_debugAssertOpened());

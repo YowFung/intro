@@ -1,3 +1,16 @@
+## 1.1.1
+
+* Optimize the document.
+
+## 1.1.0
+
+* Repair inheritance for decoration.
+* Allow to tap the barrier area to continue next step.
+* Rewrite the example code.
+* Public some properties of `Intro`.
+* Rename some APIs.
+* Update documents.
+
 ## 1.0.4
 
 * The close button is displayed by default in the last step.
