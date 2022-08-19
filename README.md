@@ -19,7 +19,9 @@ A step-by-step wizard, which can help you to introduce your product or to demons
 
 ## Demo
 
-![](./demo.gif)
+![image-20220819091044177](README.assets/image-20220819091044177.png)
+
+![](./README.assets/demo.gif)
 
 
 
@@ -107,27 +109,7 @@ IntroStepTarget(
 
 Attributes for `IntroCardDecoration` :
 
-| Attribute               | Type                  | Default Value                                                | Description                                                  |
-| ----------------------- | --------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| align                   | IntroCardAlign?       | [auto]                                                       | Specify the alignment of intro card widget relative to highlighted widget. By default, it automatically estimates where the intro card should be displayed based on the location and size of the target widget. |
-| size                    | Size?                 | null                                                         | Specify the size of intro card.                              |
-| padding                 | EdgeInsets?           | null                                                         | Specify the padding of contents of intro card.               |
-| margin                  | EdgeInsets?           | EdgeInsets.all(10)                                           | Specify the distance between the intro card and the highlighted widget. |
-| border                  | Border?               | null                                                         | Specify the border of intro card.                            |
-| radius                  | BorderRadiusGeometry? | BorderRadius.all(Radius.circular(5))                         | Specify the border radius of intro card.                     |
-| backgroundColor         | Color?                | null                                                         | Specify the background color of intro card.                  |
-| textStyle               | TextStyle?            | TextStyle(<br>    color: Color(0xDCFFFFFF),<br>    fontSize: 16.0,<br>    height: 1.2,<br>) | Specify the contents style of intro card.                    |
-| showPreviousButton      | bool?                 | true                                                         | Whether to display the previous button.                      |
-| showNextButton          | bool?                 | true                                                         | Whether to display the next button.                          |
-| showCloseButton         | bool?                 | [true if is last step else false]                            | Whether to display the close button.                         |
-| previousButtonLabel     | String?               | "Previous"                                                   | Specify the label of previous button.                        |
-| nextButtonLabel         | String?               | "Next"                                                       | Specify the label of next button.                            |
-| closeButtonLabel        | String?               | ["Finish" if is last step else "Close"]                      | Specify the label of close button.                           |
-| autoHideDisabledButtons | bool?                 | true                                                         | Whether to hide disabled buttons automatically. When it set to `true`, the previous button is not be displayed in the first step because no step can be back, and the next button is also not be displayed in the last step because no step can to continue. |
-| previousButtonStyle     | ButtonStyle?          | null                                                         | Specify the style of previous button.                        |
-| nextButtonStyle         | ButtonStyle?          | null                                                         | Specify the style of next button.                            |
-| closeButtonStyle        | ButtonStyle?          | null                                                         | Specify the style of close button.                           |
-| tapBarrierToContinue    | bool?                 | false                                                        | Whether can be continue when tap the mask area.              |
+![image-20220819085850595](README.assets/image-20220819085850595.png)
 
 
 
@@ -163,16 +145,11 @@ IntroStepTarget(
 
 Attributes for `IntroHighlightDecoration`:
 
-| Attributes | Type                  | Default Value     | Description                                                  |
-| ---------- | --------------------- | ----------------- | ------------------------------------------------------------ |
-| border     | Border?               | null              | Specify the border of highlighted widget.                    |
-| radius     | BorderRadiusGeometry? | null              | Specify the border radius of highlighted widget.             |
-| padding    | EdgeInsets?           | null              | Specify that the highlighted widget exceeds the margin of the target widget. |
-| cursor     | MouseCursor?          | MouseCursor.defer | Specify the mouse cursor that moving on the highlighted widget. |
+![image-20220819085820842](README.assets/image-20220819085820842.png)
 
 
 
-### **Demo flow control**
+### **Controller**
 
 You can control the demo flow through the `IntroController` instance.
 
@@ -242,6 +219,12 @@ controller.previous();
 controller.jumpTo(5);
 ```
 
+Manually refresh.
+
+```dart
+controller.refresh();
+```
+
 
 
 ### **Customized intro card**
@@ -265,15 +248,7 @@ IntroStepTarget.custom(
 
 Attributes for `IntroParams`:
 
-| Attributes      | Type            | Description                                                  |
-| --------------- | --------------- | ------------------------------------------------------------ |
-| step            | int             | The step number for this `IntroStepTarget`.                  |
-| controller      | IntroController | The controller for this demo flow.                           |
-| context         | BuildContext    | The context for the `IntroStepTarget` widget of this step.   |
-| targetRect      | Rect            | The geometry for the target widget of this step.             |
-| hilightRect     | Rect            | The geometry for the highlighted area of this step.          |
-| cardRect        | Rect            | The geometry for the intro card widget of this step.         |
-| actualCardAlign | IntroCardAlign? | The final alignment of the intro card widget that relative to the highlighted widget. |
+![image-20220819085917916](README.assets/image-20220819085917916.png)
 
 
 

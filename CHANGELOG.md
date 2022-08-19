@@ -1,3 +1,7 @@
+## 1.1.2
+
+* Optimize the document.
+
 ## 1.1.1
 
 * Optimize the document.
