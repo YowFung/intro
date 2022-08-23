@@ -67,10 +67,27 @@ class _GradualOpacityState extends State<_GradualOpacity> {
   }
 }
 
+typedef WillDoCallback = bool? Function(int currentStep);
+
 /// The controller of demo flow.
 class IntroController {
   /// The total number of steps.
   final int stepCount;
+
+  /// This callback is called when the demo flow is about to jump to the previous step.
+  ///
+  /// You can return `false` if you want to prevent it from taking effect.
+  final WillDoCallback? onWillPrevious;
+
+  /// This callback is called when the demo flow is about to jump to the next step.
+  ///
+  /// You can return `false` if you want to prevent it from taking effect.
+  final WillDoCallback? onWillNext;
+
+  /// This callback is called when the demo flow is about to close.
+  ///
+  /// You can return `false` if you want to prevent it from taking effect.
+  final WillDoCallback? onWillClose;
 
   Intro? _intro;
   late final Map<int, GlobalKey> _keys;
@@ -84,6 +101,9 @@ class IntroController {
 
   IntroController({
     required this.stepCount,
+    this.onWillPrevious,
+    this.onWillNext,
+    this.onWillClose,
   }) {
     assert(stepCount > 0, "The [stepCount] argument must be greater than 0.");
     _keys = Map.fromEntries(List.generate(stepCount,
@@ -475,9 +495,11 @@ class IntroController {
     assert(_debugAssertNotDisposed());
     if (!_isOpened) return;
 
-    await _switchStep(_currentStep, 0, false);
-    _closing = true;
-    refresh();
+    if (onWillClose?.call(currentStep) ?? true) {
+      await _switchStep(_currentStep, 0, false);
+      _closing = true;
+      refresh();
+    }
   }
 
   /// Jump this demo flow to the [step].
@@ -497,20 +519,23 @@ class IntroController {
     assert(_debugAssertNotDisposed());
     assert(_debugAssertOpened());
 
-    if (isLastStep) {
-      return close();
+    if (onWillNext?.call(currentStep) ?? true) {
+      if (isLastStep) {
+        return close();
+      }
+      await _switchStep(_currentStep, _currentStep + 1);
     }
-
-    await _switchStep(_currentStep, _currentStep + 1);
   }
 
   /// Jump this demo flow to previous step if not at the first step.
   Future<void> previous() async {
     assert(_debugAssertNotDisposed());
     assert(_debugAssertOpened());
-
     if (isFirstStep) return;
-    await _switchStep(_currentStep, _currentStep - 1);
+
+    if (onWillPrevious?.call(currentStep) ?? true) {
+      await _switchStep(_currentStep, _currentStep - 1);
+    }
   }
 
   void refresh() {

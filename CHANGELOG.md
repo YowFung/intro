@@ -1,3 +1,7 @@
+## 1.2.2
+
+* Add `onWillNext`, `onWillPrevious` and `onWillClose` callbacks in the constructor of `IntroController`.
+
 ## 1.2.1
 
 * Formatting code.

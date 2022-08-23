@@ -153,6 +153,28 @@ Attributes for `IntroHighlightDecoration`:
 
 You can control the demo flow through the `IntroController` instance.
 
+Create a IntroController instance:
+
+*You must specify a total number of steps, and other callback events are optional.*
+
+```dart
+IntroController(
+  stepCount: 5,
+  onWillPrevious: (currentStep) {
+    // This callback is called when the demo flow is about to jump to the previous step.
+    // You can return `false` if you want to prevent it from taking effect.
+  },
+  onWillNext: (currentStep) {
+    // This callback is called when the demo flow is about to jump to the next step.
+    // You can return `false` if you want to prevent it from taking effect.
+  },
+  onWillClose: (currentStep) {
+    // This callback is called when the demo flow is about to close.
+    // You can return `false` if you want to prevent it from taking effect.
+  },
+);
+```
+
 Get the instance:
 
 *You can define the controller instance as a global variable to make it easier to use throughout your program. Or, you can get the controller instance through `Intro.of(context).controller`.*
