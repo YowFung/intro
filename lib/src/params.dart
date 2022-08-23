@@ -77,7 +77,7 @@ class IntroParams {
   /// The geometry for the intro card widget of this step.
   Rect get cardRect {
     final highlight = highlightRect;
-    final screen = _state._physicalSize;
+    final screen = MediaQuery.of(context).size;
     final margin = _state.widget.cardDecoration?.margin ??
         controller.intro.cardDecoration.margin ??
         const EdgeInsets.all(10);

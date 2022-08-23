@@ -86,12 +86,10 @@ class IntroStepTarget extends StatefulWidget {
 
 class _IntroStepTargetState extends State<IntroStepTarget>
     with WidgetsBindingObserver {
-  late Size _physicalSize;
 
   @override
   void initState() {
     super.initState();
-    _physicalSize = WidgetsBinding.instance.window.physicalSize;
     WidgetsBinding.instance.addObserver(this);
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       widget.controller._setTarget(this);
@@ -115,11 +113,7 @@ class _IntroStepTargetState extends State<IntroStepTarget>
 
   @override
   void didChangeMetrics() {
-    final newSize = WidgetsBinding.instance.window.physicalSize;
-    if (newSize != _physicalSize) {
-      _physicalSize = newSize;
-      _updateTarget();
-    }
+    _updateTarget();
   }
 
   void _updateTarget() {

@@ -372,7 +372,7 @@ class IntroController {
     final widget = params._state.widget;
     final rect = params.cardRect;
 
-    final screen = params._state._physicalSize;
+    final screen = MediaQuery.of(context).size;
     final left = rect.left.isInfinite ? null : rect.left;
     final right = rect.right.isInfinite ? null : (screen.width - rect.right);
     final top = rect.top.isInfinite ? null : rect.top;
