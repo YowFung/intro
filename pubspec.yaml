@@ -1,6 +1,6 @@
 name: intro
 description: A step-by-step wizard, which can help you to introduce your product or to demonstrate the usage of your application.
-version: 1.2.0
+version: 1.2.1
 homepage: "https://github.com/YowFung/intro"
 
 environment:

@@ -86,7 +86,6 @@ class IntroStepTarget extends StatefulWidget {
 
 class _IntroStepTargetState extends State<IntroStepTarget>
     with WidgetsBindingObserver {
-
   @override
   void initState() {
     super.initState();

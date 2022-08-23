@@ -252,9 +252,11 @@ class IntroController {
               _buildBorder(context),
               _buildHighlight(context),
               _buildCard(context),
-              ...intro.topLayerBuilder == null ? [] : [
-                intro.topLayerBuilder!(context, this),
-              ],
+              ...intro.topLayerBuilder == null
+                  ? []
+                  : [
+                      intro.topLayerBuilder!(context, this),
+                    ],
             ],
           ),
         ),

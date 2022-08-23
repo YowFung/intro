@@ -29,8 +29,10 @@ void main() {
         child: TextButton(
           onPressed: controller.close,
           style: ButtonStyle(
-            foregroundColor: MaterialStateColor.resolveWith((states) => Colors.white70),
-            backgroundColor: MaterialStateColor.resolveWith((states) => Colors.white24),
+            foregroundColor:
+                MaterialStateColor.resolveWith((states) => Colors.white70),
+            backgroundColor:
+                MaterialStateColor.resolveWith((states) => Colors.white24),
           ),
           child: const Text("Exit"),
         ),

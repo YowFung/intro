@@ -1,3 +1,7 @@
+## 1.2.1
+
+* Formatting code.
+
 ## 1.2.0
 
 * Fixed a bug where the intro card position was not displayed correctly when the screen resolution was scaled.
