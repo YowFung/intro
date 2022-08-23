@@ -1,3 +1,8 @@
+## 1.2.0
+
+* Fixed a bug where the intro card position was not displayed correctly when the screen resolution was scaled.
+* Add a top layer widget builder.
+
 ## 1.1.2
 
 * Optimize the document.

@@ -23,6 +23,19 @@ void main() {
             (states) => const RoundedRectangleBorder()),
       ),
     ),
+    topLayerBuilder: (context, controller) {
+      return Padding(
+        padding: const EdgeInsets.only(top: 20, left: 20),
+        child: TextButton(
+          onPressed: controller.close,
+          style: ButtonStyle(
+            foregroundColor: MaterialStateColor.resolveWith((states) => Colors.white70),
+            backgroundColor: MaterialStateColor.resolveWith((states) => Colors.white24),
+          ),
+          child: const Text("Exit"),
+        ),
+      );
+    },
     child: MaterialApp(
       title: 'Intro Demo',
       routes: {

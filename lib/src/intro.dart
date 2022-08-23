@@ -1,5 +1,7 @@
 part of intro;
 
+typedef TopLayerBuilder = Widget Function(BuildContext, IntroController);
+
 /// Demo flow widget.
 ///
 /// Please register this widget at the earliest possible widget tree node.
@@ -44,12 +46,14 @@ class Intro extends InheritedWidget {
   final Duration animationDuration;
   final IntroHighlightDecoration highlightDecoration;
   final IntroCardDecoration cardDecoration;
+  final TopLayerBuilder? topLayerBuilder;
 
   Intro({
     Key? key,
     required Widget child,
     required this.controller,
     Color? barrierColor,
+    this.topLayerBuilder,
     Duration? animationDuration,
     IntroHighlightDecoration? highlightDecoration,
     IntroCardDecoration? cardDecoration,

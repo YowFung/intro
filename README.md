@@ -338,6 +338,27 @@ IntroStepTarget(
 
 
 
+### **Top Layer**
+
+The `topLayerBuilder` of `Intro` is provided for you to create custom widgets at the top layer. For example, you can build a global exit button.
+
+```dart
+Intro(
+  topLayerBuilder: (context, controller) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 20, left: 20),
+      child: TextButton(
+        onPressed: controller.close,
+        child: const Text("Exit"),
+      ),
+    );
+  },
+  // ...
+);
+```
+
+
+
 ### **Other**
 
 Change barrier color or animation duration.
