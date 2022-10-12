@@ -1,3 +1,7 @@
+## 1.2.3
+
+* Make sure the state of target widget is mounted and has the size. 
+
 ## 1.2.2
 
 * Add `onWillNext`, `onWillPrevious` and `onWillClose` callbacks in the constructor of `IntroController`.

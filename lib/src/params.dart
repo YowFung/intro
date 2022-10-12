@@ -57,8 +57,10 @@ class IntroParams {
 
   /// The geometry for the target widget of this step.
   Rect get targetRect {
+    assert(_state.mounted, "[Intro] The target widget for step $step has been unmounted.");
     final box = context.findRenderObject() as RenderBox;
     final offset = box.localToGlobal(Offset.zero);
+    assert(box.hasSize, "[Intro] Unable to get the size of the target widget for step $step.");
     final size = box.size;
     return Rect.fromPoints(offset, size.bottomRight(offset));
   }
