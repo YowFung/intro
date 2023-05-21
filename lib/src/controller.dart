@@ -67,7 +67,7 @@ class _GradualOpacityState extends State<_GradualOpacity> {
   }
 }
 
-typedef WillDoCallback = bool? Function(int currentStep);
+typedef WillDoCallback = Future<bool?> Function(int currentStep);
 
 /// The controller of demo flow.
 class IntroController {
@@ -487,7 +487,7 @@ class IntroController {
     _currentStep = initStep;
 
     _overlayEntry = OverlayEntry(builder: _buildOverlay);
-    await Future(() => Overlay.of(context)!.insert(_overlayEntry!));
+    await Future(() => Overlay.of(context).insert(_overlayEntry!));
   }
 
   /// Close the demo flow.
@@ -495,7 +495,7 @@ class IntroController {
     assert(_debugAssertNotDisposed());
     if (!_isOpened) return;
 
-    if (onWillClose?.call(currentStep) ?? true) {
+    if (await onWillClose?.call(currentStep) ?? true) {
       await _switchStep(_currentStep, 0, false);
       _closing = true;
       refresh();
@@ -519,7 +519,7 @@ class IntroController {
     assert(_debugAssertNotDisposed());
     assert(_debugAssertOpened());
 
-    if (onWillNext?.call(currentStep) ?? true) {
+    if (await onWillNext?.call(currentStep) ?? true) {
       if (isLastStep) {
         return close();
       }
@@ -533,7 +533,7 @@ class IntroController {
     assert(_debugAssertOpened());
     if (isFirstStep) return;
 
-    if (onWillPrevious?.call(currentStep) ?? true) {
+    if (await onWillPrevious?.call(currentStep) ?? true) {
       await _switchStep(_currentStep, _currentStep - 1);
     }
   }
