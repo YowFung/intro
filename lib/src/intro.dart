@@ -1,4 +1,4 @@
-part of intro;
+part of '../intro.dart';
 
 typedef TopLayerBuilder = Widget Function(BuildContext, IntroController);
 
@@ -49,8 +49,8 @@ class Intro extends InheritedWidget {
   final TopLayerBuilder? topLayerBuilder;
 
   Intro({
-    Key? key,
-    required Widget child,
+    super.key,
+    required super.child,
     required this.controller,
     Color? barrierColor,
     this.topLayerBuilder,
@@ -62,8 +62,7 @@ class Intro extends InheritedWidget {
         animationDuration = animationDuration ?? _defaultAnimationDuration,
         highlightDecoration =
             _defaultHighlightDecoration.mergeTo(highlightDecoration),
-        cardDecoration = _defaultCardDecoration.mergeTo(cardDecoration),
-        super(key: key, child: child) {
+        cardDecoration = _defaultCardDecoration.mergeTo(cardDecoration) {
     controller._intro = this;
   }
 

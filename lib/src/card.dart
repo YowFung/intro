@@ -1,4 +1,4 @@
-part of intro;
+part of '../intro.dart';
 
 /// Default intro card.
 class IntroStepCard extends StatelessWidget {
@@ -33,10 +33,10 @@ class IntroStepCard extends StatelessWidget {
   final Widget child;
 
   const IntroStepCard({
-    Key? key,
+    super.key,
     required this.params,
     required this.child,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

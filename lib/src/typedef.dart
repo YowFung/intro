@@ -1,4 +1,4 @@
-part of intro;
+part of '../intro.dart';
 
 typedef IntroCardBuilder = Widget Function(
     BuildContext context, IntroParams params, IntroCardDecoration decoration);

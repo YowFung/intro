@@ -1,4 +1,4 @@
-part of intro;
+part of '../intro.dart';
 
 /// A widget that wraps the target widget for a step.
 class IntroStepTarget extends StatefulWidget {
@@ -46,7 +46,7 @@ class IntroStepTarget extends StatefulWidget {
   final VoidCallback? onTargetDispose;
 
   IntroStepTarget({
-    Key? key,
+    super.key,
     required this.step,
     this.onStepWillActivate,
     this.onStepWillDeactivate,
@@ -60,11 +60,10 @@ class IntroStepTarget extends StatefulWidget {
     required this.child,
   })  : assert(step > 0 && step <= controller.stepCount,
             "The [step: $step] out of range 1..${controller.stepCount}"),
-        cardBuilder = IntroStepCard._buildDefaultCard(cardContents),
-        super(key: key);
+        cardBuilder = IntroStepCard._buildDefaultCard(cardContents);
 
   IntroStepTarget.custom({
-    Key? key,
+    super.key,
     required this.step,
     this.onStepWillActivate,
     this.onStepWillDeactivate,
@@ -77,8 +76,7 @@ class IntroStepTarget extends StatefulWidget {
     this.onHighlightTap,
     required this.child,
   })  : assert(step > 0 && step <= controller.stepCount,
-            "The [step: $step] out of range 1..${controller.stepCount}"),
-        super(key: key);
+            "The [step: $step] out of range 1..${controller.stepCount}");
 
   @override
   State<IntroStepTarget> createState() => _IntroStepTargetState();

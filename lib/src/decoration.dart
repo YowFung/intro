@@ -1,4 +1,4 @@
-part of intro;
+part of '../intro.dart';
 
 /// The decoration for highlighted widget.
 class IntroHighlightDecoration {

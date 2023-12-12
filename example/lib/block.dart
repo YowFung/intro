@@ -8,13 +8,13 @@ class Block extends StatelessWidget {
   final double? fontSize;
 
   const Block({
-    Key? key,
+    super.key,
     required this.label,
     this.size,
     this.color,
     this.textColor,
     this.fontSize,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -7,7 +7,7 @@ final introCtrl1 = IntroController(stepCount: 5);
 final introCtrl2 = IntroController(stepCount: 3);
 
 class NestedDemoPage extends StatelessWidget {
-  const NestedDemoPage({Key? key}) : super(key: key);
+  const NestedDemoPage({super.key});
 
   @override
   Widget build(BuildContext context) {

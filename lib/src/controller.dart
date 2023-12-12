@@ -1,4 +1,4 @@
-part of intro;
+part of '../intro.dart';
 
 class _GradualOpacity extends StatefulWidget {
   final Duration duration;
@@ -8,7 +8,6 @@ class _GradualOpacity extends StatefulWidget {
   final Widget child;
 
   _GradualOpacity({
-    Key? key,
     required this.duration,
     this.startOpacity = 0.0,
     this.endOpacity = 1.0,
@@ -16,8 +15,7 @@ class _GradualOpacity extends StatefulWidget {
     this.onAnimationFinished,
   })  : assert(startOpacity >= 0.0 && startOpacity <= 1.0),
         assert(endOpacity >= 0.0 && endOpacity <= 1.0),
-        assert(!duration.isNegative),
-        super(key: key);
+        assert(!duration.isNegative);
 
   @override
   State<_GradualOpacity> createState() => _GradualOpacityState();

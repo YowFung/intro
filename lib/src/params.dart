@@ -1,4 +1,4 @@
-part of intro;
+part of '../intro.dart';
 
 /// Describes the alignment of introduction card widget relative to highlighted widget.
 enum IntroCardAlign {

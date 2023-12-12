@@ -1,4 +1,4 @@
-part of intro;
+part of '../intro.dart';
 
 class IntroException implements Exception {
   final dynamic message;
