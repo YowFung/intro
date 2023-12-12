@@ -23,7 +23,7 @@ class NestedDemoPage extends StatelessWidget {
           const SizedBox(width: 20),
           ElevatedButton(
             onPressed: () => introCtrl2.start(context),
-            child: const Text("Start Demo Flow 1"),
+            child: const Text("Start Demo Flow 2"),
           ),
         ],
       ),

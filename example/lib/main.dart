@@ -208,7 +208,7 @@ class _HomePageState extends State<HomePage> {
               MaterialStateColor.resolveWith((states) => Colors.blueGrey),
           textStyle:
               MaterialStateTextStyle.resolveWith((states) => const TextStyle(
-                    inherit: true,
+                    inherit: false,
                     fontSize: 24.0,
                     fontFamily: "STHupo",
                   )),
@@ -218,7 +218,7 @@ class _HomePageState extends State<HomePage> {
               MaterialStateColor.resolveWith((states) => Colors.pink),
           textStyle:
               MaterialStateTextStyle.resolveWith((states) => const TextStyle(
-                    inherit: true,
+                    inherit: false,
                     fontSize: 24.0,
                     fontFamily: "STHupo",
                   )),
@@ -228,7 +228,7 @@ class _HomePageState extends State<HomePage> {
               MaterialStateColor.resolveWith((states) => Colors.green),
           textStyle:
               MaterialStateTextStyle.resolveWith((states) => const TextStyle(
-                    inherit: true,
+                    inherit: false,
                     fontSize: 24.0,
                     fontFamily: "STHupo",
                   )),
